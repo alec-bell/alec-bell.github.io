@@ -121,6 +121,10 @@ body {
   }
 }
 
+.row-padding {
+  padding-top: 15px;
+}
+
 .owl-carousel-row-padding {
   padding-top: 30px;
   padding-left: 15px;
@@ -157,6 +161,10 @@ body {
   background: #009EDD;
 }
 
+.light-slant {
+  background: linear-gradient(110deg, #F5F5F5 60%, #FFFFFF 60%);
+}
+
 .o, .r, .p, .b {
   height: 300px;
 }
@@ -167,6 +175,7 @@ body {
 
 h1 {
   font-size: 5rem;
-  font-family: "Raleway";
+  font-family: "Josefin Sans";
+  font-weight: 300;
   color: white;
 }
