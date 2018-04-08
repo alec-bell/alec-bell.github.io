@@ -121,6 +121,18 @@ body {
   }
 }
 
+.owl-carousel-row-padding {
+  padding-top: 30px;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-bottom: 5px;
+}
+
+.image-border {
+    padding: 0px;
+    border:2px solid white;
+}
+
 .g {
   background: #61BC47;
 }
@@ -145,6 +157,16 @@ body {
   background: #009EDD;
 }
 
-.g, .y, .o, .r, .p, .b {
+.o, .r, .p, .b {
   height: 300px;
+}
+
+.owl-nav {
+  color: #FFF;
+}
+
+h1 {
+  font-size: 5rem;
+  font-family: "Raleway";
+  color: white;
 }
