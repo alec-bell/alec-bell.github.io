@@ -120,3 +120,31 @@ body {
     margin-right: 0;
   }
 }
+
+.g {
+  background: #61BC47;
+}
+
+.y {
+  background: #FCB827;
+}
+
+.o {
+  background: #F6821F;
+}
+
+.r {
+  background: #E03A3E;
+}
+
+.p {
+  background: #924095;
+}
+
+.b {
+  background: #009EDD;
+}
+
+.g, .y, .o, .r, .p, .b {
+  height: 300px;
+}
