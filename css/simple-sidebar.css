@@ -152,6 +152,10 @@ body {
   background: #FCB827;
 }
 
+.y-o {
+  background: linear-gradient(110deg, #FCB827 50%, #F6821F 50%);
+}
+
 .o {
   background: #F6821F;
 }
@@ -164,6 +168,10 @@ body {
   background: #924095;
 }
 
+.p-b {
+  background: linear-gradient(-110deg, #924095 50%, #009EDD 50%);
+}
+
 .b {
   background: #009EDD;
 }
@@ -172,7 +180,7 @@ body {
   background: linear-gradient(110deg, #F5F5F5 60%, #FFFFFF 60%);
 }
 
-.o, .r, .p, .b {
+.o, .r, .p, .b, .p-b {
   height: 300px;
 }
 
