@@ -138,7 +138,14 @@ body {
 }
 
 .g {
-  background: #61BC47;
+  background-image: linear-gradient(70deg, #61BC47 30%, rgba(0, 0, 0, 0) 30%), url('../img/personal-photos/3.6.png');
+  background-size: cover;
+  background-position: 100% 50%;
+  text-align: left;
+}
+
+.padding-g {
+  padding-left: 10px;
 }
 
 .y {
@@ -178,4 +185,8 @@ h1 {
   font-family: "Josefin Sans";
   font-weight: 300;
   color: white;
+}
+
+.font {
+  font-family: "Josefin Sans";
 }
