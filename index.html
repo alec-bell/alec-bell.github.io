@@ -75,6 +75,10 @@
     .logo-mark { opacity: 0.95; }
     .photo-strip::-webkit-scrollbar { display: none; }
     .photo-strip > figure { flex: 0 0 calc((100% - 48px) / 3); scroll-snap-align: start; }
+    /* image-slot's shadow CSS sets touch-action:none on the img for its
+       design-tool reframe gestures; on the published site that makes every
+       photo a dead zone for touch scrolling. */
+    image-slot::part(image) { touch-action: auto; }
     @media (max-width: 760px) {
       .wrap { padding: 0 20px 64px !important; }
       .hero { grid-template-columns: 1fr !important; gap: 32px !important; padding: 44px 0 36px !important; }
