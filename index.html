@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/industry-d10b3410-7a3a-4d3e-b82e-5566276ccce4/styles.css">
+  <script src="_ds/industry-d10b3410-7a3a-4d3e-b82e-5566276ccce4/_ds_bundle.js"></script>
+  <script src="./image-slot.js"></script>
+  <style>
+    :root { --muted: var(--color-neutral-600); --label: var(--color-accent-700); }
+    body[data-theme="dark"] {
+      --color-bg: #17191b; --color-surface: #202325; --color-text: #e8e9ea;
+      --color-divider: color-mix(in srgb, #f2f2f3 18%, transparent);
+      --muted: var(--color-neutral-400); --label: var(--color-accent-400);
+      --shadow-sm: none; --shadow-md: none; --shadow-lg: none;
+    }
+    a { color: var(--label); text-decoration: none; }
+    a:hover { color: var(--color-accent-600); text-decoration: underline; text-underline-offset: 3px; }
+    body[data-photos="original"] .duotone::after { display: none; }
+    .logo-mark { opacity: 0.95; }
+    @media (max-width: 760px) {
+      .wrap { padding: 0 20px 64px !important; }
+      .hero { grid-template-columns: 1fr !important; gap: 32px !important; padding: 44px 0 36px !important; }
+      .hero-name { font-size: 46px !important; }
+      .hero-face { display: block !important; }
+      .hero-portrait { display: none !important; }
+      .hero-nav { flex-wrap: wrap; row-gap: var(--space-3); }
+      .hero > .blueprint { max-width: 340px; }
+      .photo-strip { display: flex !important; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -20px; padding: 0 20px 4px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
+      .photo-strip::-webkit-scrollbar { display: none; }
+      .photo-strip > figure { flex: 0 0 100%; scroll-snap-align: center; scroll-snap-stop: always; }
+      .gallery-dots { display: flex !important; }
+      .row { grid-template-columns: 40px 1fr !important; row-gap: var(--space-2) !important; }
+      .row img { width: 28px; height: 28px; }
+      .row .row-meta, .row a.row-meta { grid-column: 2; flex-direction: row !important; align-items: baseline !important; gap: var(--space-3) !important; text-align: left !important; }
+      .site-footer { flex-direction: column; gap: var(--space-2); }
+      h2 { font-size: 24px !important; }
+    }
+  </style>
+</helmet>
+<div style="min-height: 100vh; background: var(--color-bg); color: var(--color-text)">
+  <div class="wrap" style="max-width: 1020px; margin: 0 auto; padding: 0 32px 96px">
+
+    <section class="hero" data-screen-label="Hero" style="display: grid; grid-template-columns: 1.5fr 1fr; gap: 56px; align-items: center; padding: 88px 0 72px">
+      <div style="display: flex; flex-direction: column; gap: var(--space-6)">
+        <div class="hero-face blueprint" style="display: none; width: 108px; aspect-ratio: 1; flex-shrink: 0">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <img src="photos/headshot-face.png" alt="Alexander T. Bell" style="display: block; width: 100%; height: 100%; object-fit: cover">
+        </div>
+        <h1 class="hero-name" style="font-size: 76px; margin: 0; text-transform: uppercase; letter-spacing: 0.01em; line-height: 1.02">Alexander T. Bell</h1>
+        <nav class="hero-nav" style="display: flex; align-items: center; gap: var(--space-6); font-family: var(--font-heading); font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase">
+          <button onClick="{{ copyEmail }}" title="Copy email" style="position: relative; display: flex; align-items: center; gap: var(--space-2); background: none; border: none; padding: 0; cursor: pointer; font: inherit; letter-spacing: inherit; color: var(--label); text-transform: uppercase" style-hover="color: var(--color-accent-600)">
+            <sc-if value="{{ copied }}" hint-placeholder-val="{{ false }}">
+              <span style="position: absolute; bottom: calc(100% + 6px); left: 0; background: var(--color-accent-700); color: var(--color-bg); font-size: 12px; letter-spacing: 0.08em; padding: 3px 8px; white-space: nowrap">Copied!</span>
+            </sc-if>
+            <span>alec.timothy.bell@gmail.com</span>
+            {{ copyIcon }}
+          </button>
+          <a href="https://github.com/alec-bell">GitHub</a>
+          <a href="http://linkedin.com/in/alec-bell">LinkedIn</a>
+        </nav>
+        <p style="font-size: 17px; line-height: 1.65; max-width: 54ch; margin: 0; color: var(--muted); text-wrap: pretty">I'm the co-founder and <b>CTO of ThunderPhone</b>. We build AI voice agents that handle real phone calls. Before that, I was working on computer vision and data infrastructure for robotics as well as pre-LLM chatbots for the travel industry.<br><br>I grew up in Cincinnati and currently reside in <b>San Francisco</b>. Outside of work, you'll find me playing the piano, snowboarding, or at church.</p>
+      </div>
+      <div class="hero-portrait blueprint" onClick="{{ openHero }}" style="width: 100%; aspect-ratio: 4 / 5; cursor: zoom-in">
+        <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+        <image-slot id="hero-portrait" shape="rect" src="photos/headshot.jpg" placeholder="Portrait"></image-slot>
+      </div>
+    </section>
+
+    <section data-screen-label="Photos" style="padding: 48px 0">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); margin-bottom: var(--space-8)">
+        <span style="font-family: var(--font-heading); font-weight: 600; font-size: 16px; letter-spacing: 0.1em; color: var(--label)">01</span>
+        <h2 style="font-size: 30px; margin: 0; text-transform: uppercase; letter-spacing: 0.03em">In the field</h2>
+        <div style="flex: 1; height: 1px; background: var(--color-divider)"></div>
+      </div>
+      <div class="photo-strip" onScroll="{{ onGalleryScroll }}" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px 24px">
+        <figure style="margin: 0; display: flex; flex-direction: column; gap: var(--space-3)">
+          <div class="blueprint" onClick="{{ openFig1 }}" style="aspect-ratio: 4 / 3; cursor: zoom-in">
+            <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+            <image-slot id="fig-1" shape="rect" src="photos/vapicon.jpg" placeholder="Photo"></image-slot>
+          </div>
+          <figcaption style="font-family: var(--font-heading); font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted)">Fig. 01 · Talking ThunderPhone at VapiCon</figcaption>
+        </figure>
+        <figure style="margin: 0; display: flex; flex-direction: column; gap: var(--space-3)">
+          <div class="blueprint" onClick="{{ openFig2 }}" style="aspect-ratio: 4 / 3; cursor: zoom-in">
+            <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+            <image-slot id="fig-2" shape="rect" src="photos/cofounders.jpg" placeholder="Photo"></image-slot>
+          </div>
+          <figcaption style="font-family: var(--font-heading); font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted)">Fig. 02 · With Alex, my co-founder</figcaption>
+        </figure>
+        <figure style="margin: 0; display: flex; flex-direction: column; gap: var(--space-3)">
+          <div class="blueprint" onClick="{{ openFig3 }}" style="aspect-ratio: 4 / 3; cursor: zoom-in">
+            <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+            <image-slot id="fig-3" shape="rect" src="photos/yc-cohort.jpg" placeholder="Photo"></image-slot>
+          </div>
+          <figcaption style="font-family: var(--font-heading); font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted)">Fig. 03 · Y Combinator, W23</figcaption>
+        </figure>
+      </div>
+      <div class="gallery-dots" style="display: none; justify-content: center; gap: var(--space-3); margin-top: var(--space-4)">
+        <sc-for list="{{ galleryDots }}" as="dot" hint-placeholder-count="3">
+          <button onClick="{{ dot.go }}" aria-label="Go to photo" style="width: 10px; height: 10px; padding: 0; border: 1px solid var(--color-accent-700); background: {{ dot.fill }}; cursor: pointer"></button>
+        </sc-for>
+      </div>
+    </section>
+
+    <section data-screen-label="Now" style="padding: 48px 0">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); margin-bottom: var(--space-8)">
+        <span style="font-family: var(--font-heading); font-weight: 600; font-size: 16px; letter-spacing: 0.1em; color: var(--label)">02</span>
+        <h2 style="font-size: 30px; margin: 0; text-transform: uppercase; letter-spacing: 0.03em">Current projects</h2>
+        <div style="flex: 1; height: 1px; background: var(--color-divider)"></div>
+      </div>
+      <div style="display: flex; flex-direction: column">
+        <div class="row" style="display: grid; grid-template-columns: 56px 1fr 260px; gap: var(--space-6); align-items: start; padding: var(--space-6) 0; border-bottom: 1px solid var(--color-divider)">
+          <img class="logo-mark" src="https://www.google.com/s2/favicons?domain=thunderphone.com&amp;sz=128" alt="ThunderPhone logo" width="36" height="36" style="margin-top: 2px">
+          <div style="display: flex; flex-direction: column; gap: var(--space-1)">
+            <h3 style="font-size: 21px; margin: 0; text-transform: uppercase">ThunderPhone</h3>
+            <p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted)">AI voice agents that handle real phone calls, inbound and outbound, from 2¢ a minute. I'm the CTO.</p>
+          </div>
+          <a href="https://thunderphone.com" class="row-meta" style="font-family: var(--font-heading); font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; text-align: right">thunderphone.com ↗</a>
+        </div>
+        <div class="row" style="display: grid; grid-template-columns: 56px 1fr 260px; gap: var(--space-6); align-items: start; padding: var(--space-6) 0; border-bottom: 1px solid var(--color-divider)">
+          <img class="logo-mark" src="https://www.google.com/s2/favicons?domain=translatemycall.com&amp;sz=128" alt="TranslateMyCall logo" width="36" height="36" style="margin-top: 2px">
+          <div style="display: flex; flex-direction: column; gap: var(--space-1)">
+            <h3 style="font-size: 21px; margin: 0; text-transform: uppercase">TranslateMyCall</h3>
+            <p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted)">A free app that interprets phone calls between languages in real time, with no human interpreter in the loop.</p>
+          </div>
+          <a href="https://translatemycall.com" class="row-meta" style="font-family: var(--font-heading); font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; text-align: right">translatemycall.com ↗</a>
+        </div>
+        <div class="row" style="display: grid; grid-template-columns: 56px 1fr 260px; gap: var(--space-6); align-items: start; padding: var(--space-6) 0; border-bottom: 1px solid var(--color-divider)">
+          <img class="logo-mark" src="photos/pedigree-logo.svg" alt="Pedigree logo" width="36" height="36" style="margin-top: 2px; border-radius: 6px">
+          <div style="display: flex; flex-direction: column; gap: var(--space-1)">
+            <h3 style="font-size: 21px; margin: 0; text-transform: uppercase">Pedigree</h3>
+            <p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted)">My genealogy research published as an interactive family tree: generations of Bells, traced and sourced.</p>
+          </div>
+          <a href="https://alec-bell.github.io/pedigree/" class="row-meta" style="font-family: var(--font-heading); font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; text-align: right">alec-bell.github.io/pedigree ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <section data-screen-label="Work" style="padding: 48px 0">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); margin-bottom: var(--space-8)">
+        <span style="font-family: var(--font-heading); font-weight: 600; font-size: 16px; letter-spacing: 0.1em; color: var(--label)">03</span>
+        <h2 style="font-size: 30px; margin: 0; text-transform: uppercase; letter-spacing: 0.03em">Previously</h2>
+        <div style="flex: 1; height: 1px; background: var(--color-divider)"></div>
+      </div>
+      <div style="display: flex; flex-direction: column">
+        <div class="row" style="display: grid; grid-template-columns: 56px 1fr 200px; gap: var(--space-6); align-items: start; padding: var(--space-6) 0; border-bottom: 1px solid var(--color-divider)">
+          <img class="logo-mark" src="photos/sensorsurf-logo.png" alt="SensorSurf logo" width="36" height="36" style="margin-top: 2px">
+          <div style="display: flex; flex-direction: column; gap: var(--space-1)">
+            <h3 style="font-size: 21px; margin: 0; text-transform: uppercase">SensorSurf</h3>
+            <p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted)">Founded a YC-backed data-infrastructure company for robotics, collecting, offloading, and analyzing petabytes of sensor data from robot fleets.</p>
+          </div>
+          <span class="row-meta" style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px; text-align: right"><span style="font-family: var(--font-heading); font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label)">Founder &amp; CEO</span><span style="font-family: var(--font-heading); font-size: 13px; letter-spacing: 0.08em; color: var(--muted)">2023–2024</span></span>
+        </div>
+        <div class="row" style="display: grid; grid-template-columns: 56px 1fr 200px; gap: var(--space-6); align-items: start; padding: var(--space-6) 0; border-bottom: 1px solid var(--color-divider)">
+          <img class="logo-mark" src="https://www.google.com/s2/favicons?domain=sea-machines.com&amp;sz=128" alt="Sea Machines logo" width="36" height="36" style="margin-top: 2px; mix-blend-mode: multiply">
+          <div style="display: flex; flex-direction: column; gap: var(--space-1)">
+            <h3 style="font-size: 21px; margin: 0; text-transform: uppercase">Sea Machines Robotics</h3>
+            <p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted)">Built software for autonomous navigation and remote command of commercial marine vessels.</p>
+          </div>
+          <span class="row-meta" style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px; text-align: right"><span style="font-family: var(--font-heading); font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label)">Software Engineer</span><span style="font-family: var(--font-heading); font-size: 13px; letter-spacing: 0.08em; color: var(--muted)">2022</span></span>
+        </div>
+        <div class="row" style="display: grid; grid-template-columns: 56px 1fr 200px; gap: var(--space-6); align-items: start; padding: var(--space-6) 0; border-bottom: 1px solid var(--color-divider)">
+          <img class="logo-mark" src="https://www.google.com/s2/favicons?domain=expedia.com&amp;sz=128" alt="Expedia logo" width="36" height="36" style="margin-top: 2px">
+          <div style="display: flex; flex-direction: column; gap: var(--space-1)">
+            <h3 style="font-size: 21px; margin: 0; text-transform: uppercase">Expedia</h3>
+            <p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted)">Built conversational AI for travelers, fine-tuning language models for Expedia's chatbot before LLMs were the default.</p>
+          </div>
+          <span class="row-meta" style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px; text-align: right"><span style="font-family: var(--font-heading); font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label)">Software Engineer</span><span style="font-family: var(--font-heading); font-size: 13px; letter-spacing: 0.08em; color: var(--muted)">2020–2021</span></span>
+        </div>
+        <div class="row" style="display: grid; grid-template-columns: 56px 1fr 200px; gap: var(--space-6); align-items: start; padding: var(--space-6) 0; border-bottom: 1px solid var(--color-divider)">
+          <img class="logo-mark" src="https://www.google.com/s2/favicons?domain=uber.com&amp;sz=128" alt="Uber logo" width="36" height="36" style="margin-top: 2px">
+          <div style="display: flex; flex-direction: column; gap: var(--space-1)">
+            <h3 style="font-size: 21px; margin: 0; text-transform: uppercase">Uber ATG</h3>
+            <p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted)">Uber's self-driving division, where I worked on data and tooling for autonomous vehicles.</p>
+          </div>
+          <span class="row-meta" style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px; text-align: right"><span style="font-family: var(--font-heading); font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label)">Software Engineer</span><span style="font-family: var(--font-heading); font-size: 13px; letter-spacing: 0.08em; color: var(--muted)">2019</span></span>
+        </div>
+      </div>
+    </section>
+
+    <section data-screen-label="Education" style="padding: 48px 0">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); margin-bottom: var(--space-8)">
+        <span style="font-family: var(--font-heading); font-weight: 600; font-size: 16px; letter-spacing: 0.1em; color: var(--label)">04</span>
+        <h2 style="font-size: 30px; margin: 0; text-transform: uppercase; letter-spacing: 0.03em">Education</h2>
+        <div style="flex: 1; height: 1px; background: var(--color-divider)"></div>
+      </div>
+      <div style="display: flex; flex-direction: column">
+        <div class="row" style="display: grid; grid-template-columns: 56px 1fr 260px; gap: var(--space-6); align-items: start; padding: var(--space-6) 0; border-bottom: 1px solid var(--color-divider)">
+          <img class="logo-mark" src="https://www.google.com/s2/favicons?domain=ycombinator.com&amp;sz=128" alt="Y Combinator logo" width="36" height="36" style="margin-top: 2px">
+          <div style="display: flex; flex-direction: column; gap: var(--space-1)">
+            <h3 style="font-size: 21px; margin: 0; text-transform: uppercase">Y Combinator</h3>
+            <p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted)">Went through the Winter 2023 batch as the solo founder of SensorSurf.</p>
+          </div>
+          <span class="row-meta" style="font-family: var(--font-heading); font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label); text-align: right">W23</span>
+        </div>
+        <div class="row" style="display: grid; grid-template-columns: 56px 1fr 260px; gap: var(--space-6); align-items: start; padding: var(--space-6) 0; border-bottom: 1px solid var(--color-divider)">
+          <img class="logo-mark" src="https://www.google.com/s2/favicons?domain=colorado.edu&amp;sz=128" alt="CU Boulder logo" width="36" height="36" style="margin-top: 2px">
+          <div style="display: flex; flex-direction: column; gap: var(--space-1)">
+            <h3 style="font-size: 21px; margin: 0; text-transform: uppercase">CU Boulder</h3>
+            <p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted)">Graduate work in computer science, including the computer-vision research behind VizWiz-FewShot.</p>
+          </div>
+          <span class="row-meta" style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px; text-align: right"><span style="font-family: var(--font-heading); font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label)">MS, Computer Science</span><span style="font-family: var(--font-heading); font-size: 13px; letter-spacing: 0.08em; color: var(--muted)">2020–2022</span></span>
+        </div>
+        <div class="row" style="display: grid; grid-template-columns: 56px 1fr 260px; gap: var(--space-6); align-items: start; padding: var(--space-6) 0; border-bottom: 1px solid var(--color-divider)">
+          <img class="logo-mark" src="https://www.google.com/s2/favicons?domain=osu.edu&amp;sz=128" alt="Ohio State logo" width="36" height="36" style="margin-top: 2px">
+          <div style="display: flex; flex-direction: column; gap: var(--space-1)">
+            <h3 style="font-size: 21px; margin: 0; text-transform: uppercase">Ohio State</h3>
+            <p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted)">Undergraduate computer science in my home state of Ohio.</p>
+          </div>
+          <span class="row-meta" style="display: flex; flex-direction: column; align-items: flex-end; gap: 2px; text-align: right"><span style="font-family: var(--font-heading); font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label)">BS, Computer Science</span><span style="font-family: var(--font-heading); font-size: 13px; letter-spacing: 0.08em; color: var(--muted)">2016–2020</span></span>
+        </div>
+      </div>
+    </section>
+
+    <section data-screen-label="Publications" style="padding: 48px 0 0">
+      <div style="display: flex; align-items: baseline; gap: var(--space-4); margin-bottom: var(--space-8)">
+        <span style="font-family: var(--font-heading); font-weight: 600; font-size: 16px; letter-spacing: 0.1em; color: var(--label)">05</span>
+        <h2 style="font-size: 30px; margin: 0; text-transform: uppercase; letter-spacing: 0.03em">Publications</h2>
+        <div style="flex: 1; height: 1px; background: var(--color-divider)"></div>
+      </div>
+      <div style="display: flex; flex-direction: column">
+        <div class="row" style="display: grid; grid-template-columns: 56px 1fr 260px; gap: var(--space-6); align-items: start; padding: var(--space-6) 0">
+          <img class="logo-mark" src="https://wp.mpi-sws.org/eccv2022/files/2022/03/ECCV-logo3.png" alt="ECCV 2022 logo" width="36" height="36" style="margin-top: 2px; object-fit: contain; mix-blend-mode: multiply">
+          <div style="display: flex; flex-direction: column; gap: var(--space-1)">
+            <h3 style="font-size: 21px; margin: 0; text-transform: uppercase"><a href="https://arxiv.org/abs/2207.11810" style="color: var(--color-text)">VizWiz-FewShot: Locating Objects in Images Taken by People with Visual Impairments</a></h3>
+            <p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted)">Few-shot object localization on photographs taken by blind and low-vision photographers: a benchmark and analysis toward assistive computer vision.</p>
+          </div>
+          <span class="row-meta" style="font-family: var(--font-heading); font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--label); text-align: right">ECCV 2022</span>
+        </div>
+      </div>
+    </section>
+
+    <sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
+      <div onClick="{{ closeModal }}" style="position: fixed; inset: 0; z-index: 100; background: color-mix(in srgb, #1d1f20 72%, transparent); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-4); cursor: zoom-out; padding: 48px">
+        <div class="blueprint" style="background: var(--color-bg); padding: var(--space-3)">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          {{ modalImg }}
+        </div>
+        <span style="font-family: var(--font-heading); font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; color: #f2f2f3">{{ modalCaption }}</span>
+      </div>
+    </sc-if>
+
+    <footer class="site-footer" style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 80px; padding-top: var(--space-6); border-top: 1px solid var(--color-divider); font-family: var(--font-heading); font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">
+      <span>© 2026 Alexander T. Bell</span>
+      <span>San Francisco, CA</span>
+    </footer>
+
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;light&quot;, &quot;dark&quot;], &quot;default&quot;: &quot;light&quot;, &quot;tsType&quot;: &quot;'light' | 'dark'&quot;, &quot;section&quot;: &quot;Appearance&quot;}}">
+class Component extends DCLogic {
+  state = { theme: null };
+  current() { return this.state.theme ?? this.props.theme ?? 'light'; }
+  apply() {
+    document.body.dataset.theme = this.current();
+  }
+  componentDidMount() {
+    this.apply();
+    this.onKey = (e) => { if (e.key === 'Escape') this.setState({ modal: null }); };
+    window.addEventListener('keydown', this.onKey);
+  }
+  componentWillUnmount() { window.removeEventListener('keydown', this.onKey); }
+  componentDidUpdate() { this.apply(); }
+  open(src, caption) { return () => this.setState({ modal: { src, caption } }); }
+  renderVals() {
+    const m = this.state.modal;
+    const gi = this.state.galleryIndex ?? 0;
+    return {
+      onGalleryScroll: (e) => {
+        const el = e.currentTarget;
+        const idx = Math.round(el.scrollLeft / el.clientWidth);
+        if (idx !== (this.state.galleryIndex ?? 0)) this.setState({ galleryIndex: idx });
+      },
+      galleryDots: [0, 1, 2].map((i) => ({
+        fill: i === gi ? 'var(--color-accent-700)' : 'transparent',
+        go: (e) => {
+          const strip = e.currentTarget.closest('section').querySelector('.photo-strip');
+          strip.scrollTo({ left: i * strip.clientWidth, behavior: 'smooth' });
+        }
+      })),
+      copied: !!this.state.copied,
+      copyIcon: React.createElement('svg', { width: 14, height: 14, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.5, strokeLinecap: 'round', strokeLinejoin: 'round' },
+        this.state.copied
+          ? React.createElement('path', { d: 'M20 6 9 17l-5-5' })
+          : [React.createElement('rect', { key: 'r', width: 14, height: 14, x: 8, y: 8, rx: 2, ry: 2 }), React.createElement('path', { key: 'p', d: 'M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2' })]),
+      copyEmail: () => {
+        navigator.clipboard.writeText('alec.timothy.bell@gmail.com');
+        this.setState({ copied: true });
+        clearTimeout(this.copyT);
+        this.copyT = setTimeout(() => this.setState({ copied: false }), 1600);
+      },
+      modalOpen: !!m,
+      modalImg: m ? React.createElement('img', { src: m.src, alt: 'Enlarged photo', style: { display: 'block', maxWidth: '82vw', maxHeight: '74vh' } }) : null,
+      modalCaption: m ? m.caption : '',
+      closeModal: () => this.setState({ modal: null }),
+      openHero: this.open('photos/headshot.jpg', 'Alexander T. Bell'),
+      openFig1: this.open('photos/vapicon.jpg', 'Fig. 01 · Talking ThunderPhone at VapiCon'),
+      openFig2: this.open('photos/cofounders.jpg', 'Fig. 02 · With Alex, my co-founder'),
+      openFig3: this.open('photos/yc-cohort.jpg', 'Fig. 03 · Y Combinator, W23')
+    };
+  }
+}
+</script>
+</body>
+</html>

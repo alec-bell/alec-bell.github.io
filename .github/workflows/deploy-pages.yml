@@ -16,7 +16,10 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -25,42 +28,11 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: 22
-          cache: npm
-
-      - name: Set NEXT_PUBLIC_SITE_URL
-        shell: bash
-        run: |
-          repo_name="${GITHUB_REPOSITORY#*/}"
-          owner="${GITHUB_REPOSITORY_OWNER}"
-
-          if [[ "$repo_name" == "${owner}.github.io" ]]; then
-            echo "NEXT_PUBLIC_SITE_URL=https://${owner}.github.io" >> "$GITHUB_ENV"
-          else
-            echo "NEXT_PUBLIC_SITE_URL=https://${owner}.github.io/${repo_name}" >> "$GITHUB_ENV"
-          fi
-
-      - name: Install dependencies
-        run: npm ci
-
-      - name: Build static site
-        run: npm run build
-
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./out
+          path: .
 
-  deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
