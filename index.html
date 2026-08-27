@@ -75,7 +75,6 @@
     .logo-mark { opacity: 0.95; }
     .photo-strip::-webkit-scrollbar { display: none; }
     .photo-strip > figure { flex: 0 0 calc((100% - 48px) / 3); scroll-snap-align: start; }
-    #fig-4::part(image) { object-position: center 78%; }
     @media (max-width: 760px) {
       .wrap { padding: 0 20px 64px !important; }
       .hero { grid-template-columns: 1fr !important; gap: 32px !important; padding: 44px 0 36px !important; }
@@ -407,7 +406,7 @@ class Component extends DCLogic {
       openFig1: this.open('photos/vapicon.jpg', 'Fig. 01 · Talking ThunderPhone at VapiCon'),
       openFig2: this.open('photos/cofounders.jpg', 'Fig. 02 · With Alex, my co-founder'),
       openFig3: this.open('photos/yc-cohort.jpg', 'Fig. 03 · Y Combinator, W23'),
-      openFig4: this.open('photos/piano.jpg', 'Fig. 04 · At the piano'),
+      openFig4: this.open('photos/piano-full.jpg', 'Fig. 04 · At the piano'),
       openFig5: this.open('photos/rockies.jpg', 'Fig. 05 · In the Rockies'),
       openFig6: this.open('photos/skydiving.jpg', 'Fig. 06 · Freefall')
     };
