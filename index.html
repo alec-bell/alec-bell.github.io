@@ -7,6 +7,8 @@
 <meta name="description" content="Alec Bell (Alexander T. Bell) is the co-founder and CTO of ThunderPhone, building AI voice agents that handle real phone calls. YC W23 founder. San Francisco.">
 <link rel="canonical" href="https://alec-bell.github.io/">
 <meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -73,6 +75,11 @@
     a:hover { color: var(--color-accent-600); text-decoration: underline; text-underline-offset: 3px; }
     body[data-photos="original"] .duotone::after { display: none; }
     .logo-mark { opacity: 0.95; }
+    /* Dark mode: several marks are black or blend-multiplied and vanish on
+       ink; seat every logo on a small paper chip. */
+    body[data-theme="dark"] .logo-mark { background: #f2f2f3; border-radius: 6px; padding: 3px; mix-blend-mode: normal !important; opacity: 1; }
+    /* Dark mode: soften the white studio backdrops in photos. */
+    body[data-theme="dark"] image-slot::part(image), body[data-theme="dark"] .hero-face img { filter: brightness(0.88); }
     .photo-strip::-webkit-scrollbar { display: none; }
     /* Size slides with width, not %-flex-basis: WebKit resolves a percentage
        basis inside this scroll container circularly and blows the slides up
@@ -100,6 +107,7 @@
       .photo-strip { margin: 0 -20px; padding: 0 20px 4px; -webkit-overflow-scrolling: touch; }
       .photo-strip > figure { width: 100%; scroll-snap-align: center; scroll-snap-stop: always; }
       .gallery-arrows { display: none !important; }
+      .gallery-dots { display: flex !important; }
       .row { grid-template-columns: 40px 1fr !important; row-gap: var(--space-2) !important; }
       .row img { width: 28px; height: 28px; }
       .row .row-meta, .row a.row-meta { grid-column: 2; flex-direction: row !important; align-items: baseline !important; gap: var(--space-3) !important; text-align: left !important; }
@@ -194,7 +202,7 @@
           <figcaption style="font-family: var(--font-heading); font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted)">Fig. 06 · Freefall</figcaption>
         </figure>
       </div>
-      <div class="gallery-dots" style="display: flex; justify-content: center; gap: var(--space-3); margin-top: var(--space-4)">
+      <div class="gallery-dots" style="display: none; justify-content: center; gap: var(--space-3); margin-top: var(--space-4)">
         <sc-for list="{{ galleryDots }}" as="dot" hint-placeholder-count="2">
           <button onClick="{{ dot.go }}" aria-label="Go to photo" style="width: 10px; height: 10px; padding: 0; border: 1px solid var(--color-accent-700); background: {{ dot.fill }}; cursor: pointer"></button>
         </sc-for>
