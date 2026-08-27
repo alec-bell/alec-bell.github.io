@@ -85,6 +85,9 @@
     /* Same WebKit intrinsic-size blowup as the slides, via the grid's auto
        min-size: cap the portrait's min contribution so the 1fr track wins. */
     .hero-portrait { min-width: 0; }
+    /* WebKit derives these frames' aspect-ratio from a bogus height unless
+       the width is explicit (the hero portrait already has inline width). */
+    .photo-strip .blueprint { width: 100%; }
     @media (max-width: 760px) {
       .wrap { padding: 0 20px 64px !important; }
       .hero { grid-template-columns: 1fr !important; gap: 32px !important; padding: 44px 0 36px !important; }
