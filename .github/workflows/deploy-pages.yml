@@ -36,3 +36,6 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          # Pages CDN updates occasionally take >10 min; wait up to 30.
+          timeout: 1800000
