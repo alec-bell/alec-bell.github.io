@@ -15,14 +15,14 @@
 <meta property="og:description" content="Alec Bell (Alexander T. Bell) is the co-founder and CTO of ThunderPhone, building AI voice agents that handle real phone calls. YC W23 founder. San Francisco.">
 <meta property="og:url" content="https://alec-bell.github.io/">
 <meta property="og:site_name" content="Alexander T. Bell">
-<meta property="og:image" content="https://alec-bell.github.io/photos/headshot.jpg">
-<meta property="og:image:width" content="914">
-<meta property="og:image:height" content="1280">
-<meta property="og:image:alt" content="Portrait of Alexander (Alec) Bell">
-<meta name="twitter:card" content="summary">
+<meta property="og:image" content="https://alec-bell.github.io/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Alexander (Alec) Bell, co-founder and CTO of ThunderPhone">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Alexander (Alec) Bell · Co-founder &amp; CTO of ThunderPhone">
 <meta name="twitter:description" content="Alec Bell (Alexander T. Bell) is the co-founder and CTO of ThunderPhone, building AI voice agents that handle real phone calls. YC W23 founder. San Francisco.">
-<meta name="twitter:image" content="https://alec-bell.github.io/photos/headshot-face.png">
+<meta name="twitter:image" content="https://alec-bell.github.io/og-card.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -73,6 +73,8 @@
     a:hover { color: var(--color-accent-600); text-decoration: underline; text-underline-offset: 3px; }
     body[data-photos="original"] .duotone::after { display: none; }
     .logo-mark { opacity: 0.95; }
+    .photo-strip::-webkit-scrollbar { display: none; }
+    .photo-strip > figure { flex: 0 0 calc((100% - 48px) / 3); scroll-snap-align: start; }
     @media (max-width: 760px) {
       .wrap { padding: 0 20px 64px !important; }
       .hero { grid-template-columns: 1fr !important; gap: 32px !important; padding: 44px 0 36px !important; }
@@ -81,10 +83,9 @@
       .hero-portrait { display: none !important; }
       .hero-nav { flex-wrap: wrap; row-gap: var(--space-3); }
       .hero > .blueprint { max-width: 340px; }
-      .photo-strip { display: flex !important; overflow-x: auto; scroll-snap-type: x mandatory; margin: 0 -20px; padding: 0 20px 4px; -webkit-overflow-scrolling: touch; scrollbar-width: none; }
-      .photo-strip::-webkit-scrollbar { display: none; }
-      .photo-strip > figure { flex: 0 0 100%; scroll-snap-align: center; scroll-snap-stop: always; }
-      .gallery-dots { display: flex !important; }
+      .photo-strip { margin: 0 -20px; padding: 0 20px 4px; -webkit-overflow-scrolling: touch; }
+      .photo-strip > figure { flex-basis: 100%; scroll-snap-align: center; scroll-snap-stop: always; }
+      .gallery-arrows { display: none !important; }
       .row { grid-template-columns: 40px 1fr !important; row-gap: var(--space-2) !important; }
       .row img { width: 28px; height: 28px; }
       .row .row-meta, .row a.row-meta { grid-column: 2; flex-direction: row !important; align-items: baseline !important; gap: var(--space-3) !important; text-align: left !important; }
@@ -100,7 +101,7 @@
       <div style="display: flex; flex-direction: column; gap: var(--space-6)">
         <div class="hero-face blueprint" style="display: none; width: 108px; aspect-ratio: 1; flex-shrink: 0">
           <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-          <img src="photos/headshot-face.png" alt="Alexander T. Bell" style="display: block; width: 100%; height: 100%; object-fit: cover">
+          <img src="photos/headshot-face.jpg" alt="Alexander T. Bell" style="display: block; width: 100%; height: 100%; object-fit: cover">
         </div>
         <div style="display: flex; flex-direction: column; gap: var(--space-2)">
           <h1 class="hero-name" style="font-size: 76px; margin: 0; text-transform: uppercase; letter-spacing: 0.01em; line-height: 1.02">Alexander T. Bell</h1>
@@ -130,8 +131,12 @@
         <span style="font-family: var(--font-heading); font-weight: 600; font-size: 16px; letter-spacing: 0.1em; color: var(--label)">01</span>
         <h2 style="font-size: 30px; margin: 0; text-transform: uppercase; letter-spacing: 0.03em">In the field</h2>
         <div style="flex: 1; height: 1px; background: var(--color-divider)"></div>
+        <div class="gallery-arrows" style="display: flex; gap: var(--space-2); align-self: center">
+          <button class="btn btn-icon btn-secondary" onClick="{{ galleryPrev }}" aria-label="Previous photos">&#8249;</button>
+          <button class="btn btn-icon btn-secondary" onClick="{{ galleryNext }}" aria-label="Next photos">&#8250;</button>
+        </div>
       </div>
-      <div class="photo-strip" onScroll="{{ onGalleryScroll }}" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 28px 24px">
+      <div class="photo-strip" onScroll="{{ onGalleryScroll }}" style="display: flex; overflow-x: auto; scroll-snap-type: x mandatory; gap: 24px; scrollbar-width: none">
         <figure style="margin: 0; display: flex; flex-direction: column; gap: var(--space-3)">
           <div class="blueprint" onClick="{{ openFig1 }}" style="aspect-ratio: 4 / 3; cursor: zoom-in">
             <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
@@ -153,9 +158,30 @@
           </div>
           <figcaption style="font-family: var(--font-heading); font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted)">Fig. 03 · Y Combinator, W23</figcaption>
         </figure>
+        <figure style="margin: 0; display: flex; flex-direction: column; gap: var(--space-3)">
+          <div class="blueprint" onClick="{{ openFig4 }}" style="aspect-ratio: 4 / 3; cursor: zoom-in">
+            <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+            <image-slot id="fig-4" shape="rect" src="photos/piano.jpg" placeholder="Photo"></image-slot>
+          </div>
+          <figcaption style="font-family: var(--font-heading); font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted)">Fig. 04 · At the piano</figcaption>
+        </figure>
+        <figure style="margin: 0; display: flex; flex-direction: column; gap: var(--space-3)">
+          <div class="blueprint" onClick="{{ openFig5 }}" style="aspect-ratio: 4 / 3; cursor: zoom-in">
+            <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+            <image-slot id="fig-5" shape="rect" src="photos/rockies.jpg" placeholder="Photo"></image-slot>
+          </div>
+          <figcaption style="font-family: var(--font-heading); font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted)">Fig. 05 · In the Rockies</figcaption>
+        </figure>
+        <figure style="margin: 0; display: flex; flex-direction: column; gap: var(--space-3)">
+          <div class="blueprint" onClick="{{ openFig6 }}" style="aspect-ratio: 4 / 3; cursor: zoom-in">
+            <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+            <image-slot id="fig-6" shape="rect" src="photos/skydiving.jpg" placeholder="Photo"></image-slot>
+          </div>
+          <figcaption style="font-family: var(--font-heading); font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted)">Fig. 06 · Freefall</figcaption>
+        </figure>
       </div>
-      <div class="gallery-dots" style="display: none; justify-content: center; gap: var(--space-3); margin-top: var(--space-4)">
-        <sc-for list="{{ galleryDots }}" as="dot" hint-placeholder-count="3">
+      <div class="gallery-dots" style="display: flex; justify-content: center; gap: var(--space-3); margin-top: var(--space-4)">
+        <sc-for list="{{ galleryDots }}" as="dot" hint-placeholder-count="2">
           <button onClick="{{ dot.go }}" aria-label="Go to photo" style="width: 10px; height: 10px; padding: 0; border: 1px solid var(--color-accent-700); background: {{ dot.fill }}; cursor: pointer"></button>
         </sc-for>
       </div>
@@ -321,10 +347,19 @@ class Component extends DCLogic {
     this.mq = matchMedia('(prefers-color-scheme: dark)');
     this.onScheme = () => this.apply();
     this.mq.addEventListener('change', this.onScheme);
+    this.measureGallery = () => {
+      const strip = document.querySelector('.photo-strip');
+      if (!strip) return;
+      const pages = Math.max(1, Math.round(strip.scrollWidth / strip.clientWidth));
+      if (pages !== this.state.galleryPages) this.setState({ galleryPages: pages });
+    };
+    this.measureGallery();
+    window.addEventListener('resize', this.measureGallery);
   }
   componentWillUnmount() {
     window.removeEventListener('keydown', this.onKey);
     this.mq.removeEventListener('change', this.onScheme);
+    window.removeEventListener('resize', this.measureGallery);
   }
   componentDidUpdate() { this.apply(); }
   open(src, caption) { return () => this.setState({ modal: { src, caption } }); }
@@ -337,7 +372,15 @@ class Component extends DCLogic {
         const idx = Math.round(el.scrollLeft / el.clientWidth);
         if (idx !== (this.state.galleryIndex ?? 0)) this.setState({ galleryIndex: idx });
       },
-      galleryDots: [0, 1, 2].map((i) => ({
+      galleryPrev: () => {
+        const strip = document.querySelector('.photo-strip');
+        strip.scrollBy({ left: -strip.clientWidth, behavior: 'smooth' });
+      },
+      galleryNext: () => {
+        const strip = document.querySelector('.photo-strip');
+        strip.scrollBy({ left: strip.clientWidth, behavior: 'smooth' });
+      },
+      galleryDots: Array.from({ length: this.state.galleryPages ?? 2 }, (_, i) => ({
         fill: i === gi ? 'var(--color-accent-700)' : 'transparent',
         go: (e) => {
           const strip = e.currentTarget.closest('section').querySelector('.photo-strip');
@@ -362,7 +405,10 @@ class Component extends DCLogic {
       openHero: this.open('photos/headshot.jpg', 'Alexander T. Bell'),
       openFig1: this.open('photos/vapicon.jpg', 'Fig. 01 · Talking ThunderPhone at VapiCon'),
       openFig2: this.open('photos/cofounders.jpg', 'Fig. 02 · With Alex, my co-founder'),
-      openFig3: this.open('photos/yc-cohort.jpg', 'Fig. 03 · Y Combinator, W23')
+      openFig3: this.open('photos/yc-cohort.jpg', 'Fig. 03 · Y Combinator, W23'),
+      openFig4: this.open('photos/piano.jpg', 'Fig. 04 · At the piano'),
+      openFig5: this.open('photos/rockies.jpg', 'Fig. 05 · In the Rockies'),
+      openFig6: this.open('photos/skydiving.jpg', 'Fig. 06 · Freefall')
     };
   }
 }
