@@ -67,15 +67,17 @@
   <style>
     :root { --muted: var(--color-neutral-600); --label: var(--color-accent-700); }
     body[data-theme="dark"] {
-      --color-bg: #17191b; --color-surface: #202325; --color-text: #e8e9ea;
-      --color-divider: color-mix(in srgb, #f2f2f3 18%, transparent);
+      --color-bg: #191512; --color-surface: #231d17; --color-text: #ece7de;
+      --color-divider: color-mix(in srgb, #f3efe6 18%, transparent);
       --muted: var(--color-neutral-400); --label: var(--color-accent-400);
       --shadow-sm: none; --shadow-md: none; --shadow-lg: none;
     }
+    figcaption, .site-footer, .entry-year { font-family: "IBM Plex Mono", ui-monospace, monospace !important; letter-spacing: 0.04em !important; }
+    .sidebar-face h1 { white-space: normal !important; line-height: 1.02 !important; }
     a { color: var(--label); text-decoration: none; }
     a:hover { color: var(--color-accent-600); text-decoration: underline; text-underline-offset: 3px; }
     .logo-mark { opacity: 0.95; }
-    body[data-theme="dark"] .logo-mark { background: #f2f2f3; border-radius: 6px; padding: 3px; mix-blend-mode: normal !important; opacity: 1; }
+    body[data-theme="dark"] .logo-mark { background: #f3efe6; border-radius: 6px; padding: 3px; mix-blend-mode: normal !important; opacity: 1; }
     body[data-theme="dark"] image-slot::part(image), body[data-theme="dark"] .sidebar-portrait img { filter: brightness(0.88); }
     image-slot::part(image) { touch-action: auto; }
     .gallery-grid .blueprint { width: 100%; }
@@ -84,12 +86,13 @@
     /* WebKit: 1fr grid tracks take the image-slot's intrinsic min-width and
        overflow the container; cap the items' min contribution. */
     .gallery-grid > figure { min-width: 0; }
+    .project-row a.row-meta { font-size: 12.5px !important; }
     @media (max-width: 960px) {
       .shell { display: block !important; }
       .sidebar-inner { position: static !important; height: auto !important; border-right: none !important; overflow: visible !important; gap: var(--space-4) !important; padding: 24px 20px 20px !important; }
       .sidebar-id { gap: var(--space-2) !important; }
       .sidebar-face { flex-direction: row-reverse !important; justify-content: space-between; align-items: flex-start; gap: var(--space-4) !important; }
-      .sidebar-face h1 { font-size: 42px !important; white-space: normal !important; line-height: 0.98 !important; }
+      .sidebar-face h1 { font-size: 30px !important; white-space: normal !important; line-height: 0.98 !important; }
       .sidebar-portrait { width: 124px !important; flex-shrink: 0; }
       .sidebar-contacts { margin-top: 0 !important; }
       .sidebar-nav { margin-top: 0 !important; flex-direction: row !important; gap: 18px !important; font-size: 14px !important; border-top: 1px solid var(--color-divider); padding-top: 14px; }
@@ -106,6 +109,9 @@
       .gallery-grid .span-2 { grid-column: auto !important; }
       .gallery-grid .blueprint { aspect-ratio: 4 / 3 !important; }
       .gallery-dots { display: flex !important; }
+      .tp-box { aspect-ratio: auto !important; }
+      .tp-grid { grid-template-columns: 1fr !important; }
+      .tp-nav-links, .tp-signin { display: none !important; }
       .section-title { font-size: 28px !important; }
       .about-cols { column-count: 1 !important; }
       .blog-row { grid-template-columns: 1fr !important; }
@@ -179,7 +185,7 @@
           <a href="https://thunderphone.com" style="display: block; text-decoration: none; color: inherit">
             <div class="blueprint" style="width: 100%">
               <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-              <div style="aspect-ratio: 16 / 10; background: linear-gradient(155deg, #262a22 0%, #1b1d19 45%, #141513 100%); color: #f2f2f3; display: flex; flex-direction: column; overflow: hidden; position: relative">
+              <div class="tp-box" style="aspect-ratio: 16 / 10; background: linear-gradient(155deg, #262a22 0%, #1b1d19 45%, #141513 100%); color: #f2f2f3; display: flex; flex-direction: column; overflow: hidden; position: relative">
                 <video class="tp-hero-video" src="https://thunderphone.com/hero-video/v1-169.mp4?r=31" poster="https://thunderphone.com/hero-video/v1-169.webp?r=31" autoplay muted loop playsinline preload="metadata" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 65% 35%"></video>
                 <div style="position: absolute; inset: 0; background: linear-gradient(100deg, rgba(12, 13, 12, 0.78) 0%, rgba(12, 13, 12, 0.45) 50%, rgba(12, 13, 12, 0.22) 100%), linear-gradient(to top, rgba(12, 13, 12, 0.5), transparent 40%); pointer-events: none"></div>
                 <div style="position: relative; display: flex; align-items: center; justify-content: space-between; padding: 8px 13px">
@@ -187,15 +193,15 @@
                     <span style="display: inline-flex; align-items: center; justify-content: center; width: 14px; height: 14px; background: #f5be0b; border-radius: 3px"><svg width="7" height="9" viewBox="0 0 12 16" fill="#1d1f20"><path d="M7 0 0 9.5h4L3.5 16 12 6H7.5L9 0z"/></svg></span>
                     <span style="font-weight: 600; font-size: 10px; letter-spacing: 0.01em">ThunderPhone</span>
                   </div>
-                  <div style="display: flex; gap: 10px; font-size: 8px; color: #c9cbc7">
+                  <div class="tp-nav-links" style="display: flex; gap: 10px; font-size: 8px; color: #c9cbc7">
                     <span>Technology</span><span>Platform</span><span>Pricing</span><span>Enterprise</span><span>Docs</span>
                   </div>
                   <div style="display: flex; align-items: center; gap: 8px">
-                    <span style="font-size: 8px; color: #c9cbc7">Sign in</span>
-                    <span style="background: #f6f6f4; color: #1d1f20; font-size: 8px; font-weight: 600; padding: 4px 9px; border-radius: 999px">Get started →</span>
+                    <span class="tp-signin" style="font-size: 8px; color: #c9cbc7">Sign in</span>
+                    <span style="background: #f6f6f4; color: #1d1f20; font-size: 8px; font-weight: 600; padding: 4px 9px; border-radius: 999px; white-space: nowrap">Get started →</span>
                   </div>
                 </div>
-                <div style="position: relative; flex: 1; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 14px; padding: 10px 13px 13px; align-items: end; min-height: 0">
+                <div class="tp-grid" style="position: relative; flex: 1; display: grid; grid-template-columns: 1.1fr 0.9fr; gap: 14px; padding: 10px 13px 13px; align-items: end; min-height: 0">
                   <div style="display: flex; flex-direction: column; gap: 7px; min-width: 0">
                     <span style="display: inline-flex; align-items: center; gap: 5px; align-self: flex-start; border: 1px solid rgba(242, 242, 243, 0.22); background: rgba(20, 21, 19, 0.5); border-radius: 999px; padding: 3px 8px; font-size: 7px; white-space: nowrap"><span style="width: 4px; height: 4px; border-radius: 50%; background: #f5be0b"></span><span>ThunderPhone 2.0 is live</span><span style="color: #f5be0b; font-weight: 600">Read the announcement →</span></span>
                     <span style="font-size: 19px; line-height: 1.12; letter-spacing: -0.01em; color: #fbfbfa">Voice AI that <span style="border-bottom: 2px solid #f5be0b">nails</span> the calls others fumble.</span>

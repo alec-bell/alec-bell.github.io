@@ -35,15 +35,17 @@
   <style>
     :root { --muted: var(--color-neutral-600); --label: var(--color-accent-700); }
     body[data-theme="dark"] {
-      --color-bg: #17191b; --color-surface: #202325; --color-text: #e8e9ea;
-      --color-divider: color-mix(in srgb, #f2f2f3 18%, transparent);
+      --color-bg: #191512; --color-surface: #231d17; --color-text: #ece7de;
+      --color-divider: color-mix(in srgb, #f3efe6 18%, transparent);
       --muted: var(--color-neutral-400); --label: var(--color-accent-400);
       --shadow-sm: none; --shadow-md: none; --shadow-lg: none;
     }
+    figcaption, .site-footer, .entry-year { font-family: "IBM Plex Mono", ui-monospace, monospace !important; letter-spacing: 0.04em !important; }
+    .sidebar-face h1 { white-space: normal !important; line-height: 1.02 !important; }
     a { color: var(--label); text-decoration: none; }
     a:hover { color: var(--color-accent-600); text-decoration: underline; text-underline-offset: 3px; }
     .logo-mark { opacity: 0.95; }
-    body[data-theme="dark"] .logo-mark { background: #f2f2f3; border-radius: 6px; padding: 3px; mix-blend-mode: normal !important; opacity: 1; }
+    body[data-theme="dark"] .logo-mark { background: #f3efe6; border-radius: 6px; padding: 3px; mix-blend-mode: normal !important; opacity: 1; }
     body[data-theme="dark"] image-slot::part(image) { filter: brightness(0.88); }
     image-slot::part(image) { touch-action: auto; }
     @media (max-width: 960px) {
@@ -51,7 +53,7 @@
       .sidebar-inner { position: static !important; height: auto !important; border-right: none !important; overflow: visible !important; gap: var(--space-4) !important; padding: 24px 20px 20px !important; }
       .sidebar-id { gap: var(--space-2) !important; }
       .sidebar-face { flex-direction: row-reverse !important; justify-content: space-between; align-items: flex-start; gap: var(--space-4) !important; }
-      .sidebar-face h1 { font-size: 42px !important; white-space: normal !important; line-height: 0.98 !important; }
+      .sidebar-face h1 { font-size: 30px !important; white-space: normal !important; line-height: 0.98 !important; }
       .sidebar-portrait { width: 124px !important; flex-shrink: 0; }
       .sidebar-contacts { margin-top: 0 !important; }
       .sidebar-nav { margin-top: 0 !important; flex-direction: row !important; gap: 18px !important; font-size: 14px !important; border-top: 1px solid var(--color-divider); padding-top: 14px; }
