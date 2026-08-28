@@ -81,13 +81,14 @@
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; text-underline-offset: 4px; }
     image-slot::part(image) { touch-action: auto; }
+    /* No dashed decoration rings on photos (Alec). */
+    image-slot::part(ring) { display: none; }
+    /* WebKit: explicit width so aspect-ratio frames cannot blow up. */
+    .gallery-grid .g-img { width: 100%; }
     body[data-theme="dark"] image-slot::part(image), body[data-theme="dark"] .gallery-grid img { filter: brightness(0.92); }
     body[data-theme="dark"] .logo-mark { background: #f2f2f3; border-radius: 6px; padding: 3px; mix-blend-mode: normal !important; }
     @keyframes tp-wave { 0%, 100% { transform: scaleY(0.45); } 50% { transform: scaleY(1); } }
     .gallery-grid > figure { min-width: 0; }
-    /* WebKit derives these frames' aspect-ratio from a bogus height unless
-       the width is explicit (same fix as the previous design's frames). */
-    .gallery-grid .g-img { width: 100%; }
     @media (max-width: 960px) {
       .shell { display: block !important; }
       .sidebar-inner { position: static !important; height: auto !important; overflow: visible !important; gap: 20px !important; padding: 28px 20px 24px !important; }
@@ -121,7 +122,7 @@
   </style>
 </helmet>
 <div style="min-height: 100vh; background: var(--bg); color: var(--text)">
-  <div class="shell" style="display: grid; grid-template-columns: 360px minmax(0, 1fr); max-width: 1400px; margin: 0 auto">
+  <div class="shell" style="display: grid; grid-template-columns: 360px minmax(0, 1fr)">
 
     <aside data-screen-label="Sidebar" style="background: var(--panel); color: var(--panel-text)">
       <div class="sidebar-inner" style="position: sticky; top: 0; height: 100vh; overflow-y: auto; box-sizing: border-box; display: flex; flex-direction: column; gap: 40px; padding: 56px 44px 44px">
@@ -176,7 +177,7 @@
           <img class="logo-mark" src="photos/logos/thunderphone.png" alt="ThunderPhone logo" width="22" height="22">
           <h2 style="font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin: 0">ThunderPhone</h2>
         </div>
-        <div class="company-grid" style="display: grid; grid-template-columns: 1fr 1.15fr; gap: 48px; align-items: start">
+        <div class="company-grid" style="display: grid; grid-template-columns: 1fr 1.15fr; gap: 48px; align-items: start; max-width: 1060px">
           <div style="display: flex; flex-direction: column; gap: 18px">
             <p style="margin: 0; font-size: 15px; line-height: 1.66; color: var(--body-c); max-width: 52ch; text-wrap: pretty">AI voice agents that handle real phone calls — answering inbound lines and placing outbound ones — from 2¢ a minute. Alex and I started it together; I run engineering as co-founder and CTO. It's the second company I've built, after SensorSurf (YC W23).</p>
             <a href="https://thunderphone.com" style="font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase">thunderphone.com ↗</a>
@@ -245,7 +246,7 @@
           <span style="width: 18px; height: 3px; background: var(--mark)"></span>
           <h2 style="font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin: 0">Other projects</h2>
         </div>
-        <div style="display: flex; flex-direction: column">
+        <div style="display: flex; flex-direction: column; max-width: 1060px">
           <div class="project-row" style="display: grid; grid-template-columns: 48px 1fr 260px; gap: 24px; align-items: start; padding: 22px 0; border-bottom: 1px solid var(--divider)">
             <img class="logo-mark" src="photos/logos/translatemycall.png" alt="TranslateMyCall logo" width="36" height="36" style="margin-top: 2px">
             <div style="display: flex; flex-direction: column; gap: 4px">
@@ -270,7 +271,7 @@
           <span style="width: 18px; height: 3px; background: var(--mark)"></span>
           <h2 style="font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin: 0">Photos</h2>
         </div>
-        <div class="gallery-grid" onScroll="{{ onGalleryScroll }}" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px">
+        <div class="gallery-grid" onScroll="{{ onGalleryScroll }}" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1060px">
           <figure class="span-2" style="grid-column: span 2; margin: 0; display: flex; flex-direction: column; gap: 9px">
             <div class="g-img" onClick="{{ openFig2 }}" style="aspect-ratio: 8 / 5; cursor: zoom-in">
               <image-slot id="fig-vapicon" shape="rect" src="photos/vapicon.jpg" placeholder="Photo"></image-slot>
@@ -310,13 +311,13 @@
       </section>
 
       <section id="blog" class="sec" data-screen-label="Blog" style="padding: 72px 64px 40px">
-        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px; max-width: 1060px">
           <span style="width: 18px; height: 3px; background: var(--mark)"></span>
           <h2 style="font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin: 0">Blog</h2>
           <div style="flex: 1"></div>
           <a href="blog.html" style="font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase">All posts →</a>
         </div>
-        <div style="display: flex; flex-direction: column">
+        <div style="display: flex; flex-direction: column; max-width: 1060px">
           <div class="blog-row" style="display: grid; grid-template-columns: 160px 1fr; gap: 24px; align-items: baseline; padding: 22px 0">
             <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint)">Aug 2026</span>
             <div style="display: flex; flex-direction: column; gap: 6px">
@@ -327,7 +328,7 @@
         </div>
       </section>
 
-      <footer class="site-footer" style="display: flex; justify-content: space-between; align-items: baseline; margin: 0 64px; padding: 22px 0 48px; border-top: 1px solid var(--divider); font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint)">
+      <footer class="site-footer" style="display: flex; justify-content: space-between; align-items: baseline; margin: 0 64px; padding: 22px 0 48px; border-top: 1px solid var(--divider); max-width: 1060px; font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint)">
         <span>© 2026 Alexander T. Bell</span>
         <span>San Francisco, CA</span>
       </footer>

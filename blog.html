@@ -49,6 +49,8 @@
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; text-underline-offset: 4px; }
     image-slot::part(image) { touch-action: auto; }
+    /* No dashed decoration rings on photos (Alec). */
+    image-slot::part(ring) { display: none; }
     body[data-theme="dark"] image-slot::part(image) { filter: brightness(0.92); }
     @media (max-width: 960px) {
       .shell { display: block !important; }
@@ -66,7 +68,7 @@
   </style>
 </helmet>
 <div style="min-height: 100vh; background: var(--bg); color: var(--text)">
-  <div class="shell" style="display: grid; grid-template-columns: 360px minmax(0, 1fr); max-width: 1400px; margin: 0 auto">
+  <div class="shell" style="display: grid; grid-template-columns: 360px minmax(0, 1fr)">
 
     <aside data-screen-label="Sidebar" style="background: var(--panel); color: var(--panel-text)">
       <div class="sidebar-inner" style="position: sticky; top: 0; height: 100vh; overflow-y: auto; box-sizing: border-box; display: flex; flex-direction: column; gap: 40px; padding: 56px 44px 44px">
@@ -105,7 +107,7 @@
           <span style="width: 18px; height: 3px; background: var(--mark)"></span>
           <h2 style="font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin: 0">Blog</h2>
         </div>
-        <div style="display: flex; flex-direction: column">
+        <div style="display: flex; flex-direction: column; max-width: 1060px">
           <div class="blog-row" style="display: grid; grid-template-columns: 160px 1fr; gap: 24px; align-items: baseline; padding: 22px 0">
             <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint)">Aug 2026</span>
             <div style="display: flex; flex-direction: column; gap: 6px">
@@ -116,7 +118,7 @@
         </div>
       </section>
 
-      <footer class="site-footer" style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 88px; padding-top: 22px; border-top: 1px solid var(--divider); font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint)">
+      <footer class="site-footer" style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 88px; padding-top: 22px; border-top: 1px solid var(--divider); max-width: 1060px; font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint)">
         <span>© 2026 Alexander T. Bell</span>
         <span>San Francisco, CA</span>
       </footer>
