@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hello, world · Alexander T. Bell</title>
+<meta name="description" content="What this site is, and what I plan to put here. The first post on Alec Bell's blog.">
+<link rel="canonical" href="https://alec-bell.github.io/hello-world.html">
+<meta name="color-scheme" content="light dark">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<script src="./support.js"></script>
+</head>
+<body>
+<script>document.body.dataset.theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';</script>
+<x-dc>
+<helmet>
+  <link rel="stylesheet" href="_ds/industry-d10b3410-7a3a-4d3e-b82e-5566276ccce4/styles.css">
+  <script src="_ds/industry-d10b3410-7a3a-4d3e-b82e-5566276ccce4/_ds_bundle.js"></script>
+  <script src="./image-slot.js"></script>
+  <style>
+    :root { --muted: var(--color-neutral-600); --label: var(--color-accent-700); }
+    body[data-theme="dark"] {
+      --color-bg: #17191b; --color-surface: #202325; --color-text: #e8e9ea;
+      --color-divider: color-mix(in srgb, #f2f2f3 18%, transparent);
+      --muted: var(--color-neutral-400); --label: var(--color-accent-400);
+      --shadow-sm: none; --shadow-md: none; --shadow-lg: none;
+    }
+    a { color: var(--label); text-decoration: none; }
+    a:hover { color: var(--color-accent-600); text-decoration: underline; text-underline-offset: 3px; }
+    body[data-theme="dark"] image-slot::part(image) { filter: brightness(0.88); }
+    image-slot::part(image) { touch-action: auto; }
+    @media (max-width: 960px) {
+      .shell { display: block !important; }
+      .sidebar-inner { position: static !important; height: auto !important; border-right: none !important; overflow: visible !important; gap: var(--space-4) !important; padding: 24px 20px 20px !important; }
+      .sidebar-id { gap: var(--space-2) !important; }
+      .sidebar-face { flex-direction: row-reverse !important; justify-content: space-between; align-items: flex-start; gap: var(--space-4) !important; }
+      .sidebar-face h1 { font-size: 42px !important; white-space: normal !important; line-height: 0.98 !important; }
+      .sidebar-portrait { width: 124px !important; flex-shrink: 0; }
+      .sidebar-contacts { margin-top: 0 !important; }
+      .sidebar-nav { margin-top: 0 !important; flex-direction: row !important; gap: 18px !important; font-size: 14px !important; border-top: 1px solid var(--color-divider); padding-top: 14px; }
+      .main-col { padding: 48px 20px 64px !important; }
+      .post-title { font-size: 40px !important; }
+    }
+  </style>
+</helmet>
+<div style="min-height: 100vh; background: var(--color-bg); color: var(--color-text)">
+  <div class="shell" style="display: grid; grid-template-columns: 360px minmax(0, 1fr); max-width: 1400px; margin: 0 auto">
+
+    <aside data-screen-label="Sidebar">
+      <div class="sidebar-inner" style="position: sticky; top: 0; height: 100vh; overflow-y: auto; box-sizing: border-box; display: flex; flex-direction: column; gap: var(--space-6); padding: 48px 40px 40px; border-right: 1px solid var(--color-divider)">
+        <div class="sidebar-id" style="display: flex; flex-direction: column; gap: var(--space-6)">
+        <div class="sidebar-face" style="display: flex; flex-direction: column; gap: var(--space-6)">
+        <div class="sidebar-portrait blueprint" onClick="{{ openPortrait }}" style="width: 216px; aspect-ratio: 4 / 5; cursor: zoom-in">
+          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+          <image-slot id="sidebar-portrait-blog" shape="rect" src="photos/headshot.jpg" placeholder="Portrait"></image-slot>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: var(--space-1)">
+          <h1 style="font-size: 34px; margin: 0; text-transform: uppercase; letter-spacing: 0.01em; line-height: 1.05; white-space: nowrap"><a href="./" style="color: var(--color-text)">Alexander T. Bell</a></h1>
+          <div class="sidebar-contacts" style="display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-1); margin-top: 36px; font-family: var(--font-body); font-size: 14px">
+            <button onClick="{{ copyEmail }}" title="Copy email" style="position: relative; display: flex; align-items: center; gap: var(--space-2); background: none; border: none; padding: 0; cursor: pointer; font: inherit; color: var(--label); text-align: left" style-hover="color: var(--color-accent-600)">
+              <sc-if value="{{ copied }}" hint-placeholder-val="{{ false }}">
+                <span style="position: absolute; top: calc(100% + 4px); left: 0; background: var(--color-accent-700); color: var(--color-bg); font-size: 12px; letter-spacing: 0.08em; padding: 3px 8px; white-space: nowrap; z-index: 2">Copied!</span>
+              </sc-if>
+              <span>alec.timothy.bell@gmail.com</span>
+              {{ copyIcon }}
+            </button>
+            <a href="https://github.com/alec-bell">github.com/alec-bell</a>
+            <a href="https://www.linkedin.com/in/alec-bell">linkedin.com/in/alec-bell</a>
+          </div>
+        </div>
+        </div>
+        </div>
+        <nav class="sidebar-nav" style="margin-top: var(--space-4); display: flex; flex-direction: column; gap: var(--space-3); font-family: var(--font-heading); font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase">
+          <a href="./">Home</a>
+          <span style="color: var(--color-text)">Blog</span>
+          <a href="background.html">Background</a>
+        </nav>
+      </div>
+    </aside>
+
+    <main class="main-col" style="padding: 64px 64px 96px; min-width: 0">
+      <article data-screen-label="Hello world post" style="max-width: 680px">
+        <a href="blog.html" style="font-family: var(--font-heading); font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase">← Blog</a>
+        <div style="display: flex; flex-direction: column; gap: var(--space-3); padding: var(--space-8) 0 var(--space-6); border-bottom: 1px solid var(--color-divider); margin-bottom: var(--space-8)">
+          <span style="font-family: var(--font-heading); font-size: 14px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--label)">Blog · August 2026</span>
+          <h2 class="post-title" style="font-size: 56px; margin: 0; text-transform: uppercase; letter-spacing: 0.01em; line-height: 1.02">Hello, world</h2>
+        </div>
+        <div style="display: flex; flex-direction: column; gap: var(--space-6); font-size: 17px; line-height: 1.7; color: var(--color-text)">
+          <p style="margin: 0; text-wrap: pretty">This site now has a blog. This is the obligatory first post.</p>
+          <p style="margin: 0; text-wrap: pretty">The plan is to write occasionally about building ThunderPhone: what it takes for an AI agent to hold up on a real phone call, where the hard problems actually are, and what we got wrong before getting it right. Some posts may wander into side projects, or genealogy.</p>
+          <p style="margin: 0; text-wrap: pretty">I make no promises about cadence. If posts show up here more than a few times a year, something has gone unusually well.</p>
+          <p style="margin: 0; text-wrap: pretty">If you want to reach me about any of it, my email is in the sidebar.</p>
+          <p style="margin: 0; text-wrap: pretty; color: var(--muted)">— Alec</p>
+        </div>
+      </article>
+      <sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
+        <div onClick="{{ closeModal }}" style="position: fixed; inset: 0; z-index: 100; background: color-mix(in srgb, #1d1f20 72%, transparent); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-4); cursor: zoom-out; padding: 48px">
+          <div class="blueprint" style="background: var(--color-bg); padding: var(--space-3)">
+            <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+            {{ modalImg }}
+          </div>
+          <span style="font-family: var(--font-heading); font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; color: #f2f2f3">{{ modalCaption }}</span>
+        </div>
+      </sc-if>
+    </main>
+  </div>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;light&quot;, &quot;dark&quot;], &quot;default&quot;: &quot;light&quot;, &quot;tsType&quot;: &quot;'light' | 'dark'&quot;, &quot;section&quot;: &quot;Appearance&quot;}}">
+class Component extends DCLogic {
+  state = {};
+  current() { return this.state.theme ?? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); }
+  apply() { document.body.dataset.theme = this.current(); }
+  componentDidMount() {
+    this.apply();
+    this.onKey = (e) => { if (e.key === 'Escape') this.setState({ modal: null }); };
+    window.addEventListener('keydown', this.onKey);
+    this.mq = matchMedia('(prefers-color-scheme: dark)');
+    this.onScheme = () => this.apply();
+    this.mq.addEventListener('change', this.onScheme);
+  }
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this.onKey);
+    this.mq.removeEventListener('change', this.onScheme);
+  }
+  open(src, caption) { return () => this.setState({ modal: { src, caption } }); }
+  componentDidUpdate() { this.apply(); }
+  renderVals() {
+    const m = this.state.modal;
+    return {
+      openPortrait: this.open('photos/headshot.jpg', 'Alexander T. Bell'),
+      modalOpen: !!m,
+      modalImg: m ? React.createElement('img', { src: m.src, alt: 'Enlarged photo', style: { display: 'block', maxWidth: '82vw', maxHeight: '74vh' } }) : null,
+      modalCaption: m ? m.caption : '',
+      closeModal: () => this.setState({ modal: null }),
+      copied: !!this.state.copied,
+      copyIcon: React.createElement('svg', { width: 14, height: 14, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.5, strokeLinecap: 'round', strokeLinejoin: 'round' },
+        this.state.copied
+          ? React.createElement('path', { d: 'M20 6 9 17l-5-5' })
+          : [React.createElement('rect', { key: 'r', width: 14, height: 14, x: 8, y: 8, rx: 2, ry: 2 }), React.createElement('path', { key: 'p', d: 'M4 16c-1.1 0-2-.9-2-2V4c0-1.1.9-2 2-2h10c1.1 0 2 .9 2 2' })]),
+      copyEmail: () => {
+        navigator.clipboard.writeText('alec.timothy.bell@gmail.com');
+        this.setState({ copied: true });
+        clearTimeout(this.copyT);
+        this.copyT = setTimeout(() => this.setState({ copied: false }), 1600);
+      }
+    };
+  }
+}
+</script>
+</body>
+</html>
