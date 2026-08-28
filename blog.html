@@ -29,101 +29,101 @@
 <script>document.body.dataset.theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';</script>
 <x-dc>
 <helmet>
-  <link rel="stylesheet" href="_ds/industry-d10b3410-7a3a-4d3e-b82e-5566276ccce4/styles.css">
-  <script src="_ds/industry-d10b3410-7a3a-4d3e-b82e-5566276ccce4/_ds_bundle.js"></script>
   <script src="./image-slot.js"></script>
   <style>
-    :root { --muted: var(--color-neutral-600); --label: var(--color-accent-700); }
-    body[data-theme="dark"] {
-      --color-bg: #17191b; --color-surface: #202325; --color-text: #e8e9ea;
-      --color-divider: color-mix(in srgb, #f2f2f3 18%, transparent);
-      --muted: var(--color-neutral-400); --label: var(--color-accent-400);
-      --shadow-sm: none; --shadow-md: none; --shadow-lg: none;
+    :root {
+      --bg: #ffffff; --text: #17170f; --body-c: #4f4f4a; --faint: #a8a8a0;
+      --divider: rgba(23, 23, 15, 0.12);
+      --panel: #222517; --panel-text: #eff0e6; --panel-muted: #7c7f6c;
+      --panel-link-line: rgba(143, 154, 85, 0.7); --panel-accent: #b9c08b;
+      --accent: #5c6534; --mark: #6b7346;
     }
-    a { color: var(--label); text-decoration: none; }
-    a:hover { color: var(--color-accent-600); text-decoration: underline; text-underline-offset: 3px; }
-    body[data-theme="dark"] image-slot::part(image) { filter: brightness(0.88); }
+    body[data-theme="dark"] {
+      --bg: #23261b; --text: #edeee0; --body-c: #b4b5a3; --faint: #83866f;
+      --divider: rgba(237, 238, 224, 0.14);
+      --panel: #1c1f14; --panel-text: #edeee0; --panel-muted: #83866f;
+      --panel-link-line: rgba(185, 192, 139, 0.55); --panel-accent: #b9c08b;
+      --accent: #b9c08b; --mark: #8f9a55;
+    }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 15px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+    a { color: var(--accent); text-decoration: none; }
+    a:hover { text-decoration: underline; text-underline-offset: 4px; }
     image-slot::part(image) { touch-action: auto; }
+    body[data-theme="dark"] image-slot::part(image) { filter: brightness(0.92); }
     @media (max-width: 960px) {
       .shell { display: block !important; }
-      .sidebar-inner { position: static !important; height: auto !important; border-right: none !important; overflow: visible !important; gap: var(--space-4) !important; padding: 24px 20px 20px !important; }
-      .sidebar-id { gap: var(--space-2) !important; }
-      .sidebar-face { flex-direction: row-reverse !important; justify-content: space-between; align-items: flex-start; gap: var(--space-4) !important; }
-      .sidebar-face h1 { font-size: 42px !important; white-space: normal !important; line-height: 0.98 !important; }
+      .sidebar-inner { position: static !important; height: auto !important; overflow: visible !important; gap: 20px !important; padding: 28px 20px 24px !important; }
+      .sidebar-id { gap: 12px !important; }
+      .sidebar-face { flex-direction: row-reverse !important; justify-content: space-between; align-items: flex-start; gap: 20px !important; }
+      .sidebar-face h1 { font-size: 30px !important; white-space: normal !important; line-height: 1 !important; }
       .sidebar-portrait { width: 124px !important; flex-shrink: 0; }
       .sidebar-contacts { margin-top: 0 !important; }
-      .sidebar-nav { margin-top: 0 !important; flex-direction: row !important; gap: 18px !important; font-size: 14px !important; border-top: 1px solid var(--color-divider); padding-top: 14px; }
+      .sidebar-nav { margin-top: 0 !important; flex-direction: row !important; gap: 18px !important; font-size: 12px !important; border-top: 1px solid rgba(239, 240, 230, 0.18); padding-top: 14px; }
       .main-col { padding: 48px 20px 64px !important; }
-      .site-footer { flex-direction: column; gap: var(--space-2); }
-      .section-title { font-size: 28px !important; }
+      .site-footer { flex-direction: column; gap: 8px; }
       .blog-row { grid-template-columns: 1fr !important; }
     }
   </style>
 </helmet>
-<div style="min-height: 100vh; background: var(--color-bg); color: var(--color-text)">
+<div style="min-height: 100vh; background: var(--bg); color: var(--text)">
   <div class="shell" style="display: grid; grid-template-columns: 360px minmax(0, 1fr); max-width: 1400px; margin: 0 auto">
 
-    <aside data-screen-label="Sidebar">
-      <div class="sidebar-inner" style="position: sticky; top: 0; height: 100vh; overflow-y: auto; box-sizing: border-box; display: flex; flex-direction: column; gap: var(--space-6); padding: 48px 40px 40px; border-right: 1px solid var(--color-divider)">
-        <div class="sidebar-id" style="display: flex; flex-direction: column; gap: var(--space-6)">
-        <div class="sidebar-face" style="display: flex; flex-direction: column; gap: var(--space-6)">
-        <div class="sidebar-portrait blueprint" onClick="{{ openPortrait }}" style="width: 216px; aspect-ratio: 4 / 5; cursor: zoom-in">
-          <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
+    <aside data-screen-label="Sidebar" style="background: var(--panel); color: var(--panel-text)">
+      <div class="sidebar-inner" style="position: sticky; top: 0; height: 100vh; overflow-y: auto; box-sizing: border-box; display: flex; flex-direction: column; gap: 40px; padding: 56px 44px 44px">
+        <div class="sidebar-id" style="display: flex; flex-direction: column; gap: 40px">
+        <div class="sidebar-face" style="display: flex; flex-direction: column; gap: 40px">
+        <div class="sidebar-portrait" onClick="{{ openPortrait }}" style="width: 216px; aspect-ratio: 4 / 5; cursor: zoom-in">
           <image-slot id="sidebar-portrait-blogindex" shape="rect" src="photos/headshot.jpg" placeholder="Portrait"></image-slot>
         </div>
-        <div style="display: flex; flex-direction: column; gap: var(--space-1)">
-          <h1 style="font-size: 34px; margin: 0; text-transform: uppercase; letter-spacing: 0.01em; line-height: 1.05; white-space: nowrap"><a href="./" style="color: var(--color-text)">Alexander T. Bell</a></h1>
-          <div class="sidebar-contacts" style="display: flex; flex-direction: column; align-items: flex-start; gap: var(--space-1); margin-top: 36px; font-family: var(--font-body); font-size: 14px">
-            <button onClick="{{ copyEmail }}" title="Copy email" style="position: relative; display: flex; align-items: center; gap: var(--space-2); background: none; border: none; padding: 0; cursor: pointer; font: inherit; color: var(--label); text-align: left" style-hover="color: var(--color-accent-600)">
+        <div style="display: flex; flex-direction: column; gap: 4px">
+          <h1 style="font-size: 28px; font-weight: 700; margin: 0; line-height: 1; letter-spacing: -0.03em; white-space: nowrap"><a href="./" style="color: var(--panel-text)">Alexander T. Bell</a><span style="color: #8f9a55">.</span></h1>
+          <div class="sidebar-contacts" style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-top: 32px; font-size: 13.5px">
+            <button onClick="{{ copyEmail }}" title="Copy email" style="position: relative; display: flex; align-items: center; gap: 7px; background: none; border: none; padding: 0; cursor: pointer; font: inherit; font-size: 13.5px; color: var(--panel-text); text-align: left" style-hover="color: var(--panel-accent)">
               <sc-if value="{{ copied }}" hint-placeholder-val="{{ false }}">
-                <span style="position: absolute; top: calc(100% + 4px); left: 0; background: var(--color-accent-700); color: var(--color-bg); font-size: 12px; letter-spacing: 0.08em; padding: 3px 8px; white-space: nowrap; z-index: 2">Copied!</span>
+                <span style="position: absolute; top: calc(100% + 5px); left: 0; background: var(--panel-accent); color: #222517; font-size: 11px; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; padding: 3px 8px; white-space: nowrap; z-index: 2">Copied!</span>
               </sc-if>
-              <span>alec.timothy.bell@gmail.com</span>
+              <span style="text-decoration: underline; text-decoration-color: var(--panel-link-line); text-underline-offset: 4px">alec.timothy.bell@gmail.com</span>
               {{ copyIcon }}
             </button>
-            <a href="https://github.com/alec-bell">github.com/alec-bell</a>
-            <a href="https://www.linkedin.com/in/alec-bell">linkedin.com/in/alec-bell</a>
+            <a href="https://github.com/alec-bell" style="color: var(--panel-text); text-decoration: underline; text-decoration-color: var(--panel-link-line); text-underline-offset: 4px">github.com/alec-bell</a>
+            <a href="https://www.linkedin.com/in/alec-bell" style="color: var(--panel-text); text-decoration: underline; text-decoration-color: var(--panel-link-line); text-underline-offset: 4px">linkedin.com/in/alec-bell</a>
           </div>
         </div>
         </div>
         </div>
-        <nav class="sidebar-nav" style="margin-top: var(--space-4); display: flex; flex-direction: column; gap: var(--space-3); font-family: var(--font-heading); font-size: 15px; letter-spacing: 0.08em; text-transform: uppercase">
-          <a href="./">Home</a>
-          <span style="color: var(--color-text)">Blog</span>
-          <a href="background.html">Background</a>
+        <nav class="sidebar-nav" style="margin-top: 8px; display: flex; flex-direction: column; gap: 10px; font-size: 13px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase">
+          <a href="./" style="color: var(--panel-muted)">Home</a>
+          <span style="color: var(--panel-accent)">Blog</span>
+          <a href="background.html" style="color: var(--panel-muted)">Background</a>
         </nav>
       </div>
     </aside>
 
     <main class="main-col" style="padding: 64px 64px 96px; min-width: 0">
       <section data-screen-label="Blog index">
-        <div style="display: flex; align-items: baseline; gap: var(--space-4); margin-bottom: var(--space-8)">
-          <h2 class="section-title" style="font-size: 38px; margin: 0; text-transform: uppercase; letter-spacing: 0.02em">Blog</h2>
-          <div style="flex: 1; height: 1px; background: var(--color-divider)"></div>
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 16px">
+          <span style="width: 18px; height: 3px; background: var(--mark)"></span>
+          <h2 style="font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin: 0">Blog</h2>
         </div>
         <div style="display: flex; flex-direction: column">
-          <div class="blog-row" style="display: grid; grid-template-columns: 160px 1fr; gap: var(--space-6); align-items: baseline; padding: var(--space-6) 0">
-            <span style="font-family: var(--font-heading); font-size: 14px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">Aug 2026</span>
-            <div style="display: flex; flex-direction: column; gap: var(--space-2)">
-              <h3 style="font-size: 28px; margin: 0; text-transform: uppercase"><a href="hello-world.html" style="color: var(--color-text)">Hello, world</a></h3>
-              <p style="margin: 0; font-size: 15px; line-height: 1.6; color: var(--muted)">What this site is, and what I plan to put here.</p>
+          <div class="blog-row" style="display: grid; grid-template-columns: 160px 1fr; gap: 24px; align-items: baseline; padding: 22px 0">
+            <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint)">Aug 2026</span>
+            <div style="display: flex; flex-direction: column; gap: 6px">
+              <h3 style="font-size: 24px; font-weight: 700; letter-spacing: -0.02em; margin: 0"><a href="hello-world.html" style="color: var(--text)">Hello, world</a></h3>
+              <p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: var(--body-c)">What this site is, and what I plan to put here.</p>
             </div>
           </div>
         </div>
       </section>
 
-
-      <footer class="site-footer" style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 80px; padding-top: var(--space-6); border-top: 1px solid var(--color-divider); font-family: var(--font-heading); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">
+      <footer class="site-footer" style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 88px; padding-top: 22px; border-top: 1px solid var(--divider); font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint)">
         <span>© 2026 Alexander T. Bell</span>
         <span>San Francisco, CA</span>
       </footer>
       <sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
-        <div onClick="{{ closeModal }}" style="position: fixed; inset: 0; z-index: 100; background: color-mix(in srgb, #1d1f20 72%, transparent); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-4); cursor: zoom-out; padding: 48px">
-          <div class="blueprint" style="background: var(--color-bg); padding: var(--space-3)">
-            <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
-            {{ modalImg }}
-          </div>
-          <span style="font-family: var(--font-heading); font-size: 15px; letter-spacing: 0.06em; text-transform: uppercase; color: #f2f2f3">{{ modalCaption }}</span>
+        <div onClick="{{ closeModal }}" style="position: fixed; inset: 0; z-index: 100; background: rgba(23, 23, 15, 0.78); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 16px; cursor: zoom-out; padding: 48px">
+          <div style="background: var(--bg); padding: 10px">{{ modalImg }}</div>
+          <span style="font-size: 12px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: #eff0e6">{{ modalCaption }}</span>
         </div>
       </sc-if>
     </main>
