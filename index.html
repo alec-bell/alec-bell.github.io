@@ -114,9 +114,6 @@
       .gallery-grid .span-2 { grid-column: auto !important; }
       .gallery-grid .g-img { aspect-ratio: 4 / 3 !important; }
       .gallery-dots { display: flex !important; }
-      .tp-box { aspect-ratio: auto !important; }
-      .tp-grid { grid-template-columns: 1fr !important; }
-      .tp-nav-links, .tp-signin { display: none !important; }
       .blog-row { grid-template-columns: 1fr !important; }
     }
   </style>
@@ -182,7 +179,9 @@
             <p style="margin: 0; font-size: 15px; line-height: 1.66; color: var(--body-c); max-width: 52ch; text-wrap: pretty">AI voice agents that handle real phone calls — answering inbound lines and placing outbound ones — from 2¢ a minute. Alex and I started it together; I run engineering as co-founder and CTO. It's the second company I've built, after SensorSurf (YC W23).</p>
             <a href="https://thunderphone.com" style="font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase">thunderphone.com ↗</a>
           </div>
-          <a href="https://thunderphone.com" style="display: block; text-decoration: none; color: inherit">
+          <a href="https://thunderphone.com" style="display: block; min-width: 0; text-decoration: none; color: inherit">
+            <div class="tp-scale-outer" style="height: {{ tpOuterH }}; overflow: hidden">
+            <div style="width: 540px; transform: scale({{ tpScale }}); transform-origin: top left">
             <div class="tp-box" style="aspect-ratio: 16 / 10; background: linear-gradient(155deg, #262a22 0%, #1b1d19 45%, #141513 100%); color: #f2f2f3; display: flex; flex-direction: column; overflow: hidden; position: relative">
               <video class="tp-hero-video" src="https://thunderphone.com/hero-video/v1-169.mp4?r=31" poster="https://thunderphone.com/hero-video/v1-169.webp?r=31" autoplay muted loop playsinline preload="metadata" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 65% 35%"></video>
               <div style="position: absolute; inset: 0; background: linear-gradient(100deg, rgba(12, 13, 12, 0.78) 0%, rgba(12, 13, 12, 0.45) 50%, rgba(12, 13, 12, 0.22) 100%), linear-gradient(to top, rgba(12, 13, 12, 0.5), transparent 40%); pointer-events: none"></div>
@@ -236,6 +235,8 @@
                   <div style="transition: opacity 0.45s ease, transform 0.45s ease, max-height 0.45s ease, margin-top 0.45s ease; overflow: hidden; max-height: {{ mhTag }}; margin-top: {{ mtTag }}; opacity: {{ opTag }}; transform: translateY({{ yTag }})"><span style="display: block; font-size: 7px; font-style: italic; color: rgba(242, 242, 243, 0.75)">Hears callers right — noise, accents and all.</span></div>
                 </div>
               </div>
+            </div>
+            </div>
             </div>
           </a>
         </div>
@@ -359,6 +360,16 @@ class Component extends DCLogic {
     };
     this.startVideo();
     this.videoT = setInterval(this.startVideo, 1000);
+    // The mock always keeps its widescreen composition; scale it down to
+    // fit narrow containers instead of restacking.
+    this.measureTp = () => {
+      const el = document.querySelector('.tp-scale-outer');
+      if (!el) return;
+      const sc = Math.min(1, el.clientWidth / 540);
+      if (Math.abs(sc - (this.state.tpScale ?? 1)) > 0.005) this.setState({ tpScale: sc });
+    };
+    this.measureTp();
+    window.addEventListener('resize', this.measureTp);
     this.animT = setInterval(() => this.setState({ heroT: ((this.state.heroT ?? 0) + 0.4) % 12 }), 400);
     this.onKey = (e) => { if (e.key === 'Escape') this.setState({ modal: null }); };
     window.addEventListener('keydown', this.onKey);
@@ -371,6 +382,7 @@ class Component extends DCLogic {
     this.mq.removeEventListener('change', this.onScheme);
     clearInterval(this.videoT);
     clearInterval(this.animT);
+    window.removeEventListener('resize', this.measureTp);
   }
   componentDidUpdate() { this.apply(); }
   open(src, caption) { return () => this.setState({ modal: { src, caption } }); }
@@ -392,6 +404,8 @@ class Component extends DCLogic {
       modalImg: m ? React.createElement('img', { src: m.src, alt: 'Enlarged photo', style: { display: 'block', maxWidth: '82vw', maxHeight: '74vh' } }) : null,
       modalCaption: m ? m.caption : '',
       closeModal: () => this.setState({ modal: null }),
+      tpScale: String(this.state.tpScale ?? 1),
+      tpOuterH: (337.5 * (this.state.tpScale ?? 1)).toFixed(1) + 'px',
       waveBars: [30, 62, 45, 80, 55, 72, 40, 66, 85, 50, 35, 60, 76, 46, 58, 70, 38, 62, 52, 68].map((h, i) => ({ h: h + '%', d: (i * 0.09).toFixed(2) + 's' })),
       ...(() => {
         const t = this.state.heroT ?? 0;
