@@ -53,6 +53,7 @@
     image-slot::part(ring) { display: none; }
     body[data-theme="dark"] image-slot::part(image) { filter: brightness(0.92); }
     @media (min-width: 961px) {
+      .sidebar-portrait { margin: 0 auto; }
       .main-col { padding-left: max(64px, calc((100% - 1060px) / 2)) !important; }
     }
     @media (max-width: 960px) {
