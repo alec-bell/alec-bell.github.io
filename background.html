@@ -54,7 +54,6 @@
     body[data-theme="dark"] image-slot::part(image) { filter: brightness(0.92); }
     body[data-theme="dark"] .logo-mark { background: #f2f2f3; border-radius: 6px; padding: 3px; mix-blend-mode: normal !important; }
     @media (min-width: 961px) {
-      .sidebar-portrait { margin: 0 auto; }
       .main-col { padding-left: max(64px, calc((100% - 1060px) / 2)) !important; }
     }
     @media (max-width: 960px) {
@@ -81,7 +80,7 @@
       <div class="sidebar-inner" style="position: sticky; top: 0; height: 100vh; overflow-y: auto; box-sizing: border-box; display: flex; flex-direction: column; gap: 40px; padding: 56px 44px 44px">
         <div class="sidebar-id" style="display: flex; flex-direction: column; gap: 40px">
         <div class="sidebar-face" style="display: flex; flex-direction: column; gap: 40px">
-        <div class="sidebar-portrait" onClick="{{ openPortrait }}" style="width: 216px; aspect-ratio: 4 / 5; cursor: zoom-in">
+        <div class="sidebar-portrait" onClick="{{ openPortrait }}" style="width: 100%; aspect-ratio: 4 / 5; cursor: zoom-in">
           <image-slot id="sidebar-portrait-bg" shape="rect" src="photos/headshot.jpg" placeholder="Portrait"></image-slot>
         </div>
         <div style="display: flex; flex-direction: column; gap: 4px">

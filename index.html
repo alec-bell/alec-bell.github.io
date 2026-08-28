@@ -90,7 +90,6 @@
     @keyframes tp-wave { 0%, 100% { transform: scaleY(0.45); } 50% { transform: scaleY(1); } }
     .gallery-grid > figure { min-width: 0; }
     @media (min-width: 961px) {
-      .sidebar-portrait { margin: 0 auto; }
       .sec { padding-left: max(64px, calc((100% - 1060px) / 2)) !important; }
       .site-footer { margin-left: max(64px, calc((100% - 1060px) / 2)) !important; }
     }
@@ -130,7 +129,7 @@
       <div class="sidebar-inner" style="position: sticky; top: 0; height: 100vh; overflow-y: auto; box-sizing: border-box; display: flex; flex-direction: column; gap: 40px; padding: 56px 44px 44px">
         <div class="sidebar-id" style="display: flex; flex-direction: column; gap: 40px">
         <div class="sidebar-face" style="display: flex; flex-direction: column; gap: 40px">
-        <div class="sidebar-portrait" onClick="{{ openPortrait }}" style="width: 216px; aspect-ratio: 4 / 5; cursor: zoom-in">
+        <div class="sidebar-portrait" onClick="{{ openPortrait }}" style="width: 100%; aspect-ratio: 4 / 5; cursor: zoom-in">
           <image-slot id="sidebar-portrait" shape="rect" src="photos/headshot.jpg" placeholder="Portrait"></image-slot>
         </div>
         <div style="display: flex; flex-direction: column; gap: 4px">
