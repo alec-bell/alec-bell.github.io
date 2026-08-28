@@ -78,7 +78,7 @@
     body[data-theme="dark"] image-slot::part(image), body[data-theme="dark"] .sidebar-portrait img { filter: brightness(0.88); }
     image-slot::part(image) { touch-action: auto; }
     .gallery-grid .blueprint { width: 100%; }
-    .tp-fade { transition: opacity 0.45s ease, transform 0.45s ease; }
+    .tp-fade { transition: opacity 0.45s ease, transform 0.45s ease, max-height 0.45s ease, margin-top 0.45s ease; }
     @keyframes tp-wave { 0%, 100% { transform: scaleY(0.45); } 50% { transform: scaleY(1); } }
     /* WebKit: 1fr grid tracks take the image-slot's intrinsic min-width and
        overflow the container; cap the items' min contribution. */
@@ -202,7 +202,7 @@
                       <span style="background: #f6f6f4; color: #1d1f20; font-size: 8px; font-weight: 600; padding: 5px 10px; border-radius: 999px">Start free →</span>
                     </div>
                   </div>
-                  <div style="display: flex; flex-direction: column; gap: 5px; min-width: 0">
+                  <div style="display: flex; flex-direction: column; min-width: 0">
                     <div style="background: #f2f1ec; color: #1d1f20; border-radius: 8px; box-shadow: 0 12px 28px rgba(0, 0, 0, 0.35); padding: 8px 10px; display: flex; flex-direction: column; gap: 6px; min-width: 0">
                       <span style="font-family: ui-monospace, monospace; font-size: 6.5px; letter-spacing: 0.1em; text-transform: uppercase; color: #6b7075">Caller · Site noise</span>
                       <div style="display: flex; gap: 7px; align-items: center">
@@ -213,18 +213,20 @@
                         </div>
                         <span style="font-size: 7.5px; line-height: 1.4; color: #3a3e41">“Excavator’s down — we need the hydraulic pump, E-X, three fifty.”</span>
                       </div>
-                      <div style="display: flex; flex-direction: column; gap: 3px; font-family: ui-monospace, monospace; font-size: 7px; border-top: 1px solid #ddddd5; padding-top: 5px">
-                        <span class="tp-fade" style="display: flex; justify-content: space-between; color: #8a8d90; opacity: {{ opA }}; transform: translateY({{ yA }})"><span style="letter-spacing: 0.08em">TRANSCRIPT A</span><span>“EX-350”</span></span>
-                        <span class="tp-fade" style="display: flex; justify-content: space-between; color: #8a8d90; opacity: {{ opB }}; transform: translateY({{ yB }})"><span style="letter-spacing: 0.08em">TRANSCRIPT B</span><span style="text-decoration: line-through">“SX-350”</span></span>
-                        <span class="tp-fade" style="display: flex; justify-content: space-between; color: #1d1f20; font-weight: 700; opacity: {{ opL }}; transform: translateY({{ yL }})"><span style="letter-spacing: 0.08em">AUDIO LLM</span><span>“EX-350” <span style="display: inline-block; width: 4px; height: 4px; border-radius: 50%; background: #f5be0b"></span></span></span>
+                      <div style="font-family: ui-monospace, monospace; font-size: 7px; border-top: 1px solid #ddddd5; padding-top: 5px">
+                        <div class="tp-fade" style="overflow: hidden; max-height: {{ mhA }}; margin-top: {{ mtA }}; opacity: {{ opA }}; transform: translateY({{ yA }})"><span style="display: flex; justify-content: space-between; color: #8a8d90"><span style="letter-spacing: 0.08em">TRANSCRIPT A</span><span>“EX-350”</span></span></div>
+                        <div class="tp-fade" style="overflow: hidden; max-height: {{ mhB }}; margin-top: {{ mtB }}; opacity: {{ opB }}; transform: translateY({{ yB }})"><span style="display: flex; justify-content: space-between; color: #8a8d90"><span style="letter-spacing: 0.08em">TRANSCRIPT B</span><span style="text-decoration: line-through">“SX-350”</span></span></div>
+                        <div class="tp-fade" style="overflow: hidden; max-height: {{ mhL }}; margin-top: {{ mtL }}; opacity: {{ opL }}; transform: translateY({{ yL }})"><span style="display: flex; justify-content: space-between; color: #1d1f20; font-weight: 700"><span style="letter-spacing: 0.08em">AUDIO LLM</span><span>“EX-350” <span style="display: inline-block; width: 4px; height: 4px; border-radius: 50%; background: #f5be0b"></span></span></span></div>
                       </div>
                     </div>
-                    <span class="tp-fade" style="align-self: stretch; display: flex; align-items: center; gap: 5px; background: rgba(120, 123, 118, 0.35); border-radius: 6px; padding: 4px 9px; font-family: ui-monospace, monospace; font-size: 7px; color: #e4e5e2; opacity: {{ opChip }}; transform: translateY({{ yChip }})">🔍 Parts lookup · EX-350 — 2 in stock</span>
-                    <div class="tp-fade" style="background: rgba(24, 25, 23, 0.82); border: 1px solid rgba(245, 190, 11, 0.35); border-radius: 8px; padding: 6px 9px; display: flex; flex-direction: column; gap: 3px; opacity: {{ opBub }}; transform: translateY({{ yBub }})">
-                      <span style="font-family: ui-monospace, monospace; font-size: 6px; letter-spacing: 0.12em; color: #f5be0b">THUNDERPHONE</span>
-                      <span style="font-size: 7.5px; line-height: 1.45; color: #f0f0ee">“Found it — pump EX-350, two in stock. Courier it out to the Ridgeline site today?”</span>
+                    <div class="tp-fade" style="overflow: hidden; max-height: {{ mhChip }}; margin-top: {{ mtChip }}; opacity: {{ opChip }}; transform: translateY({{ yChip }})"><span style="display: flex; align-items: center; gap: 5px; background: rgba(120, 123, 118, 0.35); border-radius: 6px; padding: 4px 9px; font-family: ui-monospace, monospace; font-size: 7px; color: #e4e5e2">🔍 Parts lookup · EX-350 — 2 in stock</span></div>
+                    <div class="tp-fade" style="overflow: hidden; max-height: {{ mhBub }}; margin-top: {{ mtBub }}; opacity: {{ opBub }}; transform: translateY({{ yBub }})">
+                      <div style="background: rgba(24, 25, 23, 0.82); border: 1px solid rgba(245, 190, 11, 0.35); border-radius: 8px; padding: 6px 9px; display: flex; flex-direction: column; gap: 3px">
+                        <span style="font-family: ui-monospace, monospace; font-size: 6px; letter-spacing: 0.12em; color: #f5be0b">THUNDERPHONE</span>
+                        <span style="font-size: 7.5px; line-height: 1.45; color: #f0f0ee">“Found it — pump EX-350, two in stock. Courier it out to the Ridgeline site today?”</span>
+                      </div>
                     </div>
-                    <span class="tp-fade" style="font-size: 7px; font-style: italic; color: rgba(242, 242, 243, 0.75); opacity: {{ opTag }}; transform: translateY({{ yTag }})">Hears callers right — noise, accents and all.</span>
+                    <div class="tp-fade" style="overflow: hidden; max-height: {{ mhTag }}; margin-top: {{ mtTag }}; opacity: {{ opTag }}; transform: translateY({{ yTag }})"><span style="display: block; font-size: 7px; font-style: italic; color: rgba(242, 242, 243, 0.75)">Hears callers right — noise, accents and all.</span></div>
                   </div>
                 </div>
               </div>
@@ -386,10 +388,13 @@ class Component extends DCLogic {
       waveBars: [30, 62, 45, 80, 55, 72, 40, 66, 85, 50, 35, 60, 76, 46, 58, 70, 38, 62, 52, 68].map((h, i) => ({ h: h + '%', d: (i * 0.09).toFixed(2) + 's' })),
       ...(() => {
         const t = this.state.heroT ?? 0;
-        const vis = (at, o, y) => { const on = t >= at; return { [o]: on ? '1' : '0', [y]: on ? '0px' : '5px' }; };
+        const vis = (at, key, mh, mt) => {
+          const on = t >= at;
+          return { ['op' + key]: on ? '1' : '0', ['y' + key]: on ? '0px' : '5px', ['mh' + key]: on ? mh : '0px', ['mt' + key]: on ? mt : '0px' };
+        };
         return {
-          ...vis(1.2, 'opA', 'yA'), ...vis(2.0, 'opB', 'yB'), ...vis(2.8, 'opL', 'yL'),
-          ...vis(4.0, 'opChip', 'yChip'), ...vis(5.6, 'opBub', 'yBub'), ...vis(8.0, 'opTag', 'yTag'),
+          ...vis(1.2, 'A', '20px', '3px'), ...vis(2.0, 'B', '20px', '3px'), ...vis(2.8, 'L', '20px', '3px'),
+          ...vis(4.0, 'Chip', '34px', '5px'), ...vis(5.6, 'Bub', '110px', '5px'), ...vis(8.0, 'Tag', '28px', '5px'),
         };
       })(),
       openPortrait: this.open('photos/headshot.jpg', 'Alexander T. Bell'),
