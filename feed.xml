@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Alexander T. Bell</title>
+  <subtitle>Occasional writing on building ThunderPhone, AI voice agents, and side projects.</subtitle>
+  <link href="https://alec-bell.github.io/"/>
+  <link rel="self" href="https://alec-bell.github.io/feed.xml"/>
+  <updated>2026-08-28T00:00:00Z</updated>
+  <id>https://alec-bell.github.io/</id>
+  <author><name>Alexander T. Bell</name></author>
+  <entry>
+    <title>Hello, world</title>
+    <link href="https://alec-bell.github.io/hello-world.html"/>
+    <id>https://alec-bell.github.io/hello-world.html</id>
+    <updated>2026-08-28T00:00:00Z</updated>
+    <summary>What this site is, and what I plan to put here.</summary>
+  </entry>
+</feed>

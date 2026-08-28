@@ -12,6 +12,17 @@
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Background · Alexander T. Bell">
+<meta property="og:description" content="Job history, education, and publications of Alec Bell: ThunderPhone, SensorSurf (YC W23), Sea Machines, Expedia, Uber ATG, ECCV 2022.">
+<meta property="og:url" content="https://alec-bell.github.io/background.html">
+<meta property="og:site_name" content="Alexander T. Bell">
+<meta property="og:image" content="https://alec-bell.github.io/og-card.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://alec-bell.github.io/og-card.png">
+<link rel="alternate" type="application/atom+xml" title="Alexander T. Bell" href="/feed.xml">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -45,6 +56,7 @@
       .sidebar-contacts { margin-top: 0 !important; }
       .sidebar-nav { margin-top: 0 !important; flex-direction: row !important; gap: 18px !important; font-size: 14px !important; border-top: 1px solid var(--color-divider); padding-top: 14px; }
       .main-col { padding: 48px 20px 64px !important; }
+      .site-footer { flex-direction: column; gap: var(--space-2); }
       .section-title { font-size: 28px !important; }
       .timeline-row { grid-template-columns: 40px 1fr !important; row-gap: var(--space-2) !important; }
       .timeline-row .entry-year { grid-column: 2; order: 3 }
@@ -188,6 +200,11 @@
         </div>
       </section>
 
+
+      <footer class="site-footer" style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 80px; padding-top: var(--space-6); border-top: 1px solid var(--color-divider); font-family: var(--font-heading); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">
+        <span>© 2026 Alexander T. Bell</span>
+        <span>San Francisco, CA</span>
+      </footer>
       <sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
         <div onClick="{{ closeModal }}" style="position: fixed; inset: 0; z-index: 100; background: color-mix(in srgb, #1d1f20 72%, transparent); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-4); cursor: zoom-out; padding: 48px">
           <div class="blueprint" style="background: var(--color-bg); padding: var(--space-3)">

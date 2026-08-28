@@ -54,6 +54,7 @@
   ]
 }
 </script>
+<link rel="alternate" type="application/atom+xml" title="Alexander T. Bell" href="/feed.xml">
 <script src="./support.js"></script>
 </head>
 <body>
@@ -93,6 +94,7 @@
       .sidebar-contacts { margin-top: 0 !important; }
       .sidebar-nav { margin-top: 0 !important; flex-direction: row !important; gap: 18px !important; font-size: 14px !important; border-top: 1px solid var(--color-divider); padding-top: 14px; }
       .main-col { padding: 48px 20px 64px !important; }
+      .site-footer { flex-direction: column; gap: var(--space-2); }
       .company-grid { grid-template-columns: 1fr !important; gap: 32px !important; }
       .company-grid figure, .company-grid > a { max-width: 560px; }
       .project-row { grid-template-columns: 40px 1fr !important; row-gap: var(--space-2) !important; }
@@ -103,6 +105,7 @@
       .gallery-grid > figure { flex: 0 0 auto; width: 100%; scroll-snap-align: center; }
       .gallery-grid .span-2 { grid-column: auto !important; }
       .gallery-grid .blueprint { aspect-ratio: 4 / 3 !important; }
+      .gallery-dots { display: flex !important; }
       .section-title { font-size: 28px !important; }
       .about-cols { column-count: 1 !important; }
       .blog-row { grid-template-columns: 1fr !important; }
@@ -265,7 +268,7 @@
           <h2 class="section-title" style="font-size: 38px; margin: 0; text-transform: uppercase; letter-spacing: 0.02em">Photos</h2>
           <div style="flex: 1; height: 1px; background: var(--color-divider)"></div>
         </div>
-        <div class="gallery-grid" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px">
+        <div class="gallery-grid" onScroll="{{ onGalleryScroll }}" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px">
           <figure class="span-2" style="grid-column: span 2; margin: 0; display: flex; flex-direction: column; gap: var(--space-3)">
             <div class="blueprint" onClick="{{ openFig2 }}" style="aspect-ratio: 8 / 5; cursor: zoom-in">
               <i class="corner tl"></i><i class="corner tr"></i><i class="corner bl"></i><i class="corner br"></i>
@@ -302,6 +305,11 @@
             <figcaption style="font-family: var(--font-heading); font-size: 14px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted)">In the Rockies</figcaption>
           </figure>
         </div>
+        <div class="gallery-dots" style="display: none; justify-content: center; gap: var(--space-3); margin-top: var(--space-4)">
+          <sc-for list="{{ galleryDots }}" as="dot" hint-placeholder-count="5">
+            <button onClick="{{ dot.go }}" aria-label="Go to photo" style="width: 10px; height: 10px; padding: 0; border: 1px solid var(--color-accent-700); background: {{ dot.fill }}; cursor: pointer"></button>
+          </sc-for>
+        </div>
       </section>
 
       <section id="blog" data-screen-label="Blog" style="padding-top: 72px">
@@ -321,6 +329,11 @@
         </div>
       </section>
 
+
+      <footer class="site-footer" style="display: flex; justify-content: space-between; align-items: baseline; margin-top: 80px; padding-top: var(--space-6); border-top: 1px solid var(--color-divider); font-family: var(--font-heading); font-size: 13px; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted)">
+        <span>© 2026 Alexander T. Bell</span>
+        <span>San Francisco, CA</span>
+      </footer>
       <sc-if value="{{ modalOpen }}" hint-placeholder-val="{{ false }}">
         <div onClick="{{ closeModal }}" style="position: fixed; inset: 0; z-index: 100; background: color-mix(in srgb, #1d1f20 72%, transparent); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: var(--space-4); cursor: zoom-out; padding: 48px">
           <div class="blueprint" style="background: var(--color-bg); padding: var(--space-3)">
@@ -397,6 +410,18 @@ class Component extends DCLogic {
           ...vis(4.0, 'Chip', '34px', '5px'), ...vis(5.6, 'Bub', '110px', '5px'), ...vis(8.0, 'Tag', '28px', '5px'),
         };
       })(),
+      onGalleryScroll: (e) => {
+        const el = e.currentTarget;
+        const idx = Math.round(el.scrollLeft / el.clientWidth);
+        if (idx !== (this.state.galleryIndex ?? 0)) this.setState({ galleryIndex: idx });
+      },
+      galleryDots: [0, 1, 2, 3, 4].map((i) => ({
+        fill: i === (this.state.galleryIndex ?? 0) ? 'var(--color-accent-700)' : 'transparent',
+        go: () => {
+          const strip = document.querySelector('.gallery-grid');
+          strip.scrollTo({ left: i * strip.clientWidth, behavior: 'smooth' });
+        }
+      })),
       openPortrait: this.open('photos/headshot.jpg', 'Alexander T. Bell'),
       openFig2: this.open('photos/vapicon.jpg', 'Talking ThunderPhone at VapiCon'),
       openFig3: this.open('photos/piano-full.jpg', 'At the piano'),
