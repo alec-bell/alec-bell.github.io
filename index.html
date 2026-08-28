@@ -89,6 +89,10 @@
     body[data-theme="dark"] .logo-mark { background: #f2f2f3; border-radius: 6px; padding: 3px; mix-blend-mode: normal !important; }
     @keyframes tp-wave { 0%, 100% { transform: scaleY(0.45); } 50% { transform: scaleY(1); } }
     .gallery-grid > figure { min-width: 0; }
+    @media (min-width: 961px) {
+      .sec { padding-left: max(64px, calc((100% - 1060px) / 2)) !important; }
+      .site-footer { margin-left: max(64px, calc((100% - 1060px) / 2)) !important; }
+    }
     @media (max-width: 960px) {
       .shell { display: block !important; }
       .sidebar-inner { position: static !important; height: auto !important; overflow: visible !important; gap: 20px !important; padding: 28px 20px 24px !important; }

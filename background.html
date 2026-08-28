@@ -53,6 +53,9 @@
     image-slot::part(ring) { display: none; }
     body[data-theme="dark"] image-slot::part(image) { filter: brightness(0.92); }
     body[data-theme="dark"] .logo-mark { background: #f2f2f3; border-radius: 6px; padding: 3px; mix-blend-mode: normal !important; }
+    @media (min-width: 961px) {
+      .main-col { padding-left: max(64px, calc((100% - 1060px) / 2)) !important; }
+    }
     @media (max-width: 960px) {
       .shell { display: block !important; }
       .sidebar-inner { position: static !important; height: auto !important; overflow: visible !important; gap: 20px !important; padding: 28px 20px 24px !important; }
