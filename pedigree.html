@@ -67,6 +67,7 @@
       .main-col { padding: 48px 20px 64px !important; }
       .site-footer { flex-direction: column; gap: 8px; }
       .line-col { width: 302px !important; padding: 0 16px !important; }
+      .lines-pad { width: 0 !important; }
       .bio-panel { top: auto !important; bottom: 0 !important; width: 100% !important; height: 64vh !important; border-left: none !important; border-top: 1px solid var(--divider); border-radius: 14px 14px 0 0; }
     }
   </style>
@@ -143,7 +144,7 @@
                 </sc-for>
               </div>
             </sc-for>
-            <div style="width: {{ linesPad }}; flex: none"></div>
+            <div class="lines-pad" style="width: {{ linesPad }}; flex: none"></div>
           </div>
         </div>
       </section>
@@ -225,7 +226,11 @@ class Component extends DCLogic {
     const n = this.state.cols.length;
     if (this._n !== undefined && n > this._n) {
       const el = document.querySelector('.lines-scroll');
-      if (el) el.scrollTo({ left: el.scrollWidth, behavior: 'smooth' });
+      const colEls = el ? el.querySelectorAll('.line-col') : [];
+      if (el && colEls.length) {
+        const last = colEls[colEls.length - 1];
+        el.scrollTo({ left: Math.max(0, last.offsetLeft - 24), behavior: 'smooth' });
+      }
     }
     this._n = n;
   }
