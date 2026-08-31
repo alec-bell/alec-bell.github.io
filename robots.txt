@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://alec-bell.github.io/sitemap.xml
+Sitemap: https://alexandertbell.com/sitemap.xml
