@@ -9,6 +9,7 @@
 <meta name="color-scheme" content="light dark">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" href="/pedigree/pedigree-data.json" as="fetch">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -52,6 +53,9 @@
     image-slot::part(ring) { display: none; }
     body[data-theme="dark"] image-slot::part(image) { filter: brightness(0.92); }
     .lines-scroll { scrollbar-width: thin; }
+    .line-col { height: calc(100vh - 210px); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+    .col-head { position: sticky; top: 0; background: var(--bg); z-index: 1; }
+    @media (min-width: 961px) { .site-footer { display: none !important; } }
     @media (max-width: 960px) {
       .shell { display: block !important; }
       .sidebar-inner { position: static !important; height: auto !important; overflow: visible !important; gap: 20px !important; padding: 28px 20px 24px !important; }
@@ -63,7 +67,8 @@
       .sidebar-nav { margin-top: 0 !important; flex-direction: row !important; gap: 18px !important; font-size: 12px !important; border-top: 1px solid rgba(239, 240, 230, 0.18); padding-top: 14px; }
       .main-col { padding: 48px 20px 64px !important; }
       .site-footer { flex-direction: column; gap: 8px; }
-      .line-col { width: 302px !important; padding: 0 16px !important; }
+      .line-col { width: 302px !important; padding: 0 16px !important; height: 62vh !important; }
+      .sidebar-foot { display: none !important; }
       .lines-pad { width: 0 !important; }
       .bio-panel { top: auto !important; bottom: 0 !important; width: 100% !important; height: 64vh !important; border-left: none !important; border-top: 1px solid var(--divider); border-radius: 14px 14px 0 0; }
     }
@@ -101,30 +106,33 @@
           <a href="background.html" style="color: var(--panel-muted)">Background</a>
           <span style="color: var(--panel-accent)">Genealogy</span>
         </nav>
+        <div class="sidebar-foot" style="margin-top: auto; padding-top: 24px; display: flex; flex-direction: column; gap: 4px; font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--panel-muted)">
+          <span>© 2026 Alexander T. Bell</span>
+          <span>San Francisco, CA</span>
+        </div>
       </div>
     </aside>
 
     <main class="main-col" style="padding: 64px 64px 96px; min-width: 0">
 
       <section data-screen-label="Pedigree">
-        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 28px; max-width: 1120px">
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 28px">
           <span style="width: 18px; height: 3px; background: var(--mark)"></span>
           <h2 style="font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin: 0">Genealogy</h2>
-          <div style="flex: 1"></div>
-          <a href="https://alec-bell.github.io/pedigree/" style="font-size: 12.5px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase">Research view ↗</a>
+          <a href="https://alec-bell.github.io/pedigree/" style="margin-left: 14px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase">Research view ↗</a>
         </div>
 
         <div class="lines-scroll" style="overflow-x: auto; padding-bottom: 12px">
           <div style="display: flex; align-items: flex-start; min-width: min-content">
             <sc-for list="{{ cols }}" as="col" hint-placeholder-count="1">
               <div class="line-col" style="width: 380px; flex: none; border-right: 1px solid var(--divider); padding: 0 24px; box-sizing: border-box">
-                <div style="padding: 2px 0 10px; border-bottom: 1px solid var(--divider)">
+                <div class="col-head" style="padding: 2px 0 10px; border-bottom: 1px solid var(--divider)">
                   <div style="font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent)">{{ col.title }}</div>
                 </div>
                 <sc-for list="{{ col.rows }}" as="ch" hint-placeholder-count="6">
                   <div style="display: grid; grid-template-columns: 44px 1fr; gap: 14px; align-items: start; padding: 14px 12px; margin: 0 -12px; border-bottom: 1px solid var(--divider); background: {{ ch.rowBg }}">
                     <sc-if value="{{ ch.hasPortrait }}" hint-placeholder-val="{{ false }}">
-                      <img onClick="{{ ch.open }}" src="{{ ch.portrait }}" alt="{{ ch.name }}" style="width: 44px; height: 54px; object-fit: cover; cursor: pointer; margin-top: 2px">
+                      <img onClick="{{ ch.open }}" src="{{ ch.portrait }}" alt="{{ ch.name }}" loading="lazy" decoding="async" style="width: 44px; height: 54px; object-fit: cover; cursor: pointer; margin-top: 2px">
                     </sc-if>
                     <sc-if value="{{ ch.noPortrait }}" hint-placeholder-val="{{ false }}">
                       <span style="width: 44px; height: 54px; background: var(--band); margin-top: 2px; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; letter-spacing: 0.04em; color: var(--faint); opacity: 0.75">{{ ch.roman }}</span>
@@ -162,7 +170,7 @@
             <sc-if value="{{ panelHasPhotos }}" hint-placeholder-val="{{ false }}">
               <div style="display: grid; grid-template-columns: {{ panelPhotoCols }}; gap: 9px; margin: 16px 0 2px">
                 <sc-for list="{{ panelPhotos }}" as="ph" hint-placeholder-count="1">
-                  <figure style="margin: 0; min-width: 0"><img onClick="{{ ph.lb }}" src="{{ ph.src }}" alt="{{ ph.cap }}" style="width: 100%; display: block; object-fit: cover; max-height: 240px; cursor: zoom-in"><figcaption style="font-size: 10.5px; color: var(--faint); margin-top: 4px; line-height: 1.4">{{ ph.cap }}</figcaption></figure>
+                  <figure style="margin: 0; min-width: 0"><img onClick="{{ ph.lb }}" src="{{ ph.src }}" alt="{{ ph.cap }}" loading="lazy" decoding="async" style="width: 100%; display: block; object-fit: cover; max-height: 240px; cursor: zoom-in"><figcaption style="font-size: 10.5px; color: var(--faint); margin-top: 4px; line-height: 1.4">{{ ph.cap }}</figcaption></figure>
                 </sc-for>
               </div>
             </sc-if>
@@ -178,7 +186,7 @@
               <sc-if value="{{ panelHasEvs }}" hint-placeholder-val="{{ false }}">
                 <div style="display: flex; flex-direction: column; gap: 14px; margin-top: 12px">
                   <sc-for list="{{ panelEvs }}" as="evi" hint-placeholder-count="1">
-                    <figure style="margin: 0"><img onClick="{{ evi.lb }}" src="{{ evi.src }}" alt="{{ evi.cap }}" style="width: 100%; display: block; border: 1px solid var(--divider); cursor: zoom-in"><figcaption style="font-size: 11px; color: var(--faint); margin-top: 5px; line-height: 1.4">{{ evi.cap }}</figcaption></figure>
+                    <figure style="margin: 0"><img onClick="{{ evi.lb }}" src="{{ evi.src }}" alt="{{ evi.cap }}" loading="lazy" decoding="async" style="width: 100%; display: block; border: 1px solid var(--divider); cursor: zoom-in"><figcaption style="font-size: 11px; color: var(--faint); margin-top: 5px; line-height: 1.4">{{ evi.cap }}</figcaption></figure>
                   </sc-for>
                 </div>
               </sc-if>

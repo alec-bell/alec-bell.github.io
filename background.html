@@ -54,9 +54,11 @@
     body[data-theme="dark"] image-slot::part(image) { filter: brightness(0.92); }
     body[data-theme="dark"] .logo-mark { background: #f2f2f3; border-radius: 6px; padding: 3px; mix-blend-mode: normal !important; }
     @media (min-width: 961px) {
+      .site-footer { display: none !important; }
       .main-col { padding-left: max(64px, calc((100% - 1060px) / 2)) !important; }
     }
     @media (max-width: 960px) {
+      .sidebar-foot { display: none !important; }
       .shell { display: block !important; }
       .sidebar-inner { position: static !important; height: auto !important; overflow: visible !important; gap: 20px !important; padding: 28px 20px 24px !important; }
       .sidebar-id { gap: 12px !important; }
@@ -105,6 +107,10 @@
           <span style="color: var(--panel-accent)">Background</span>
           <a href="genealogy.html" style="color: var(--panel-muted)">Genealogy</a>
         </nav>
+        <div class="sidebar-foot" style="margin-top: auto; padding-top: 24px; display: flex; flex-direction: column; gap: 4px; font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--panel-muted)">
+          <span>© 2026 Alexander T. Bell</span>
+          <span>San Francisco, CA</span>
+        </div>
       </div>
     </aside>
 
