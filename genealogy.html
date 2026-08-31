@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Genealogy · Alexander T. Bell</title>
 <meta name="description" content="Generations of Bells, traced and sourced: Alec Bell's genealogy research as a line-by-line pedigree with stories and evidence.">
-<link rel="canonical" href="https://alec-bell.github.io/genealogy.html">
+<link rel="canonical" href="https://alec-bell.github.io/genealogy">
 <meta name="color-scheme" content="light dark">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -16,7 +16,7 @@
 <meta property="og:type" content="article">
 <meta property="og:title" content="Genealogy · Alexander T. Bell">
 <meta property="og:description" content="Generations of Bells, traced and sourced: Alec Bell's genealogy research as a line-by-line pedigree with stories and evidence.">
-<meta property="og:url" content="https://alec-bell.github.io/genealogy.html">
+<meta property="og:url" content="https://alec-bell.github.io/genealogy">
 <meta property="og:site_name" content="Alexander T. Bell">
 <meta property="og:image" content="https://alec-bell.github.io/og-card.png?v=2">
 <meta property="og:image:width" content="1200">
@@ -103,7 +103,7 @@
           <image-slot id="sidebar-portrait-ped" shape="rect" src="photos/headshot.jpg" placeholder="Portrait"></image-slot>
         </div>
         <div style="display: flex; flex-direction: column; gap: 4px">
-          <h1 style="font-size: 28px; font-weight: 700; margin: 0; line-height: 1; letter-spacing: -0.03em; white-space: nowrap"><a href="./" style="color: var(--panel-text)">Alexander T. Bell</a><span style="color: #8f9a55">.</span></h1>
+          <h1 style="font-size: 28px; font-weight: 700; margin: 0; line-height: 1; letter-spacing: -0.03em; white-space: nowrap"><a href="/" style="color: var(--panel-text)">Alexander T. Bell</a><span style="color: #8f9a55">.</span></h1>
           <div class="sidebar-contacts" style="display: flex; flex-direction: column; align-items: flex-start; gap: 8px; margin-top: 32px; font-size: 13.5px">
             <button onClick="{{ copyEmail }}" title="Copy email" style="position: relative; display: flex; align-items: center; gap: 7px; background: none; border: none; padding: 0; cursor: pointer; font: inherit; font-size: 13.5px; color: var(--panel-text); text-align: left" style-hover="color: var(--panel-accent)">
               <sc-if value="{{ copied }}" hint-placeholder-val="{{ false }}">
@@ -119,9 +119,9 @@
         </div>
         </div>
         <nav class="sidebar-nav" style="margin-top: 8px; display: flex; flex-direction: column; gap: 10px; font-size: 13px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase">
-          <a href="./" style="color: var(--panel-muted)">Home</a>
-          <a href="blog.html" style="color: var(--panel-muted)">Blog</a>
-          <a href="background.html" style="color: var(--panel-muted)">Background</a>
+          <a href="/" style="color: var(--panel-muted)">Home</a>
+          <a href="/blog" style="color: var(--panel-muted)">Blog</a>
+          <a href="/background" style="color: var(--panel-muted)">Background</a>
           <span style="color: var(--panel-accent)">Genealogy</span>
         </nav>
         <div class="sidebar-foot" style="margin-top: auto; padding-top: 24px; display: flex; flex-direction: column; gap: 4px; font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--panel-muted)">
@@ -137,7 +137,7 @@
         <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 28px">
           <span style="width: 18px; height: 3px; background: var(--mark)"></span>
           <h2 style="font-size: 12px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; margin: 0">Genealogy</h2>
-          <a href="https://alec-bell.github.io/pedigree/" style="margin-left: 14px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase">Research view ↗</a>
+          <a href="/pedigree/" style="margin-left: 14px; font-size: 12px; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase">Research view ↗</a>
         </div>
 
         <div class="lines-scroll" style="overflow-x: auto; padding-bottom: 12px">
@@ -264,7 +264,7 @@ class Component extends DCLogic {
   surname(n){ const p=n.replace(/["“”()]/g,'').replace(/\s*·.*$/,'').trim().split(/\s+/); return (p[p.length-1]||'').toUpperCase(); }
   person(id, roman){ const P=this.state.D[id]; return {
     key:'p'+id, roman, name:P.n, meta:this.meta(id), excerpt:this.excerpt(P),
-    portrait:P.ph&&P.ph[0]? 'https://alec-bell.github.io/pedigree/'+P.ph[0].u : '',
+    portrait:P.ph&&P.ph[0]? '/pedigree/'+P.ph[0].u : '',
     hasPortrait:!!(P.ph&&P.ph[0]), noPortrait:!(P.ph&&P.ph[0]),
     open:()=>this.setState({sel:id,tab:'story'}) }; }
   buildCol(w,k){
@@ -292,7 +292,7 @@ class Component extends DCLogic {
   renderVals(){
     const D=this.state.D;
     const P = D&&this.state.sel? D[this.state.sel] : null;
-    const B='https://alec-bell.github.io/pedigree/';
+    const B='/pedigree/';
     const mkLb=o=>()=>this.setState({lb:{src:B+o.u,cap:o.c||''}});
     return {
       cols: D? this.state.cols.map((w,k)=>this.buildCol(w,k)) : [],
