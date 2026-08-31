@@ -53,9 +53,18 @@
     image-slot::part(ring) { display: none; }
     body[data-theme="dark"] image-slot::part(image) { filter: brightness(0.92); }
     .lines-scroll { scrollbar-width: thin; }
-    .line-col { height: calc(100vh - 210px); overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
+    .line-col { overflow-y: auto; overscroll-behavior: contain; scrollbar-width: thin; }
     .col-head { position: sticky; top: 0; background: var(--bg); z-index: 1; }
-    @media (min-width: 961px) { .site-footer { display: none !important; } }
+    @media (min-width: 961px) {
+      /* Full-viewport app pane: the explorer fills the space exactly,
+         no magic-number gap above the fold. */
+      .main-col { height: 100vh; box-sizing: border-box; overflow: hidden; display: flex; flex-direction: column; padding: 64px 0 0 64px !important; }
+      .main-col > section { display: flex; flex-direction: column; flex: 1; min-height: 0; }
+      .lines-scroll { flex: 1; min-height: 0; padding-bottom: 0 !important; }
+      .lines-scroll > div { height: 100%; }
+      .line-col { height: 100%; }
+      .site-footer { display: none !important; }
+    }
     @media (max-width: 960px) {
       .shell { display: block !important; }
       .sidebar-inner { position: static !important; height: auto !important; overflow: visible !important; gap: 20px !important; padding: 28px 20px 24px !important; }
@@ -67,7 +76,7 @@
       .sidebar-nav { margin-top: 0 !important; flex-direction: row !important; gap: 18px !important; font-size: 12px !important; border-top: 1px solid rgba(239, 240, 230, 0.18); padding-top: 14px; }
       .main-col { padding: 48px 20px 64px !important; }
       .site-footer { flex-direction: column; gap: 8px; }
-      .line-col { width: 302px !important; padding: 0 16px !important; height: 62vh !important; }
+      .line-col { width: 302px !important; padding: 0 16px !important; height: 62vh; }
       .sidebar-foot { display: none !important; }
       .lines-pad { width: 0 !important; }
       .bio-panel { top: auto !important; bottom: 0 !important; width: 100% !important; height: 64vh !important; border-left: none !important; border-top: 1px solid var(--divider); border-radius: 14px 14px 0 0; }
