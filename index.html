@@ -155,6 +155,15 @@
             </button>
             <a href="https://github.com/alec-bell" style="color: var(--panel-text); text-decoration: underline; text-decoration-color: var(--panel-link-line); text-underline-offset: 4px">github.com/alec-bell</a>
             <a href="https://www.linkedin.com/in/alec-bell" style="color: var(--panel-text); text-decoration: underline; text-decoration-color: var(--panel-link-line); text-underline-offset: 4px">linkedin.com/in/alec-bell</a>
+            <div style="position: relative; display: flex; align-items: center; gap: 7px">
+              <a href="https://wa.me/@alexander_bell" style="color: var(--panel-text); text-decoration: underline; text-decoration-color: var(--panel-link-line); text-underline-offset: 4px">wa.me/@alexander_bell</a>
+              <button onClick="{{ toggleWaInfo }}" title="A note on messaging" aria-label="A note on messaging" style="background: none; border: none; padding: 0; cursor: pointer; color: var(--panel-muted); display: flex" style-hover="color: var(--panel-accent)">
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
+              </button>
+              <sc-if value="{{ waOpen }}" hint-placeholder-val="{{ false }}">
+                <span style="position: absolute; top: calc(100% + 6px); left: 0; background: var(--panel-accent); color: #222517; font-size: 11.5px; line-height: 1.5; padding: 7px 10px; width: 225px; z-index: 3">WhatsApp messages are welcome. Just say who you are in your first message, or I'll assume you're a bot.</span>
+              </sc-if>
+            </div>
           </div>
         </div>
         </div>
@@ -409,6 +418,8 @@ class Component extends DCLogic {
   renderVals() {
     const m = this.state.modal;
     return {
+      waOpen: !!this.state.waOpen,
+      toggleWaInfo: () => this.setState({ waOpen: !this.state.waOpen }),
       copied: !!this.state.copied,
       copyIcon: React.createElement('svg', { width: 14, height: 14, viewBox: '0 0 24 24', fill: 'none', stroke: 'currentColor', strokeWidth: 1.5, strokeLinecap: 'round', strokeLinejoin: 'round' },
         this.state.copied
