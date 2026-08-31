@@ -1,0 +1,21 @@
+# Alexander T. Bell (Alec Bell)
+
+> Personal site of Alec Bell: co-founder and CTO of ThunderPhone, which builds AI voice agents that handle real phone calls for businesses. Previously solo founder of SensorSurf (YC W23, robot-fleet data infrastructure); earlier worked on self-driving cars at Uber ATG, conversational AI at Expedia, and autonomous marine systems at Sea Machines. MS in computer science (CU Boulder, computer-vision research published at ECCV 2022), BS from Ohio State. Based in San Francisco.
+
+## Pages
+
+- [Home](https://alexandertbell.com/): about, current work, photos
+- [Background](https://alexandertbell.com/background): job history, education, publications
+- [Blog](https://alexandertbell.com/blog): occasional writing
+- [Genealogy](https://alexandertbell.com/genealogy): Bell family research, traced and sourced
+
+## Contact
+
+- Email: alec.timothy.bell@gmail.com
+- GitHub: https://github.com/alec-bell
+- LinkedIn: https://www.linkedin.com/in/alec-bell
+
+## Related
+
+- ThunderPhone: https://thunderphone.com
+- TranslateMyCall: https://translatemycall.com
