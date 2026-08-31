@@ -48,6 +48,15 @@
     body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 15px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; text-underline-offset: 4px; }
+    /* Scrollbars in the design language: thin, square, olive thumb. */
+    body { scrollbar-color: #cdd1bb transparent; }
+    body[data-theme="dark"] { scrollbar-color: #454a35 transparent; }
+    ::-webkit-scrollbar { width: 9px; height: 9px; }
+    ::-webkit-scrollbar-thumb { background: #cdd1bb; }
+    ::-webkit-scrollbar-thumb:hover { background: #b4ba9c; }
+    body[data-theme="dark"] ::-webkit-scrollbar-thumb { background: #454a35; }
+    body[data-theme="dark"] ::-webkit-scrollbar-thumb:hover { background: #575d43; }
+    ::-webkit-scrollbar-track { background: transparent; }
     image-slot::part(image) { touch-action: auto; }
     /* No dashed decoration rings on photos (Alec). */
     image-slot::part(ring) { display: none; }
