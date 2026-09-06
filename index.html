@@ -79,7 +79,6 @@
 <script>document.body.dataset.theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';</script>
 <x-dc>
 <helmet>
-  <script src="./image-slot.js"></script>
   <style>
     :root {
       --bg: #ffffff; --text: #17170f; --body-c: #4f4f4a; --faint: #a8a8a0;
@@ -111,12 +110,9 @@
     body[data-theme="dark"] ::-webkit-scrollbar-thumb { background: #454a35; }
     body[data-theme="dark"] ::-webkit-scrollbar-thumb:hover { background: #575d43; }
     ::-webkit-scrollbar-track { background: transparent; }
-    image-slot::part(image) { touch-action: auto; }
-    /* No dashed decoration rings on photos (Alec). */
-    image-slot::part(ring) { display: none; }
     /* WebKit: explicit width so aspect-ratio frames cannot blow up. */
     .gallery-grid .g-img { width: 100%; }
-    body[data-theme="dark"] image-slot::part(image), body[data-theme="dark"] .gallery-grid img { filter: brightness(0.92); }
+    body[data-theme="dark"] .sidebar-portrait img, body[data-theme="dark"] .gallery-grid img { filter: brightness(0.92); }
     body[data-theme="dark"] .logo-mark { background: #f2f2f3; border-radius: 6px; padding: 3px; mix-blend-mode: normal !important; }
     @keyframes tp-wave { 0%, 100% { transform: scaleY(0.45); } 50% { transform: scaleY(1); } }
     .gallery-grid > figure { min-width: 0; }
@@ -162,8 +158,8 @@
       <div class="sidebar-inner" style="position: sticky; top: 0; height: 100vh; overflow-y: auto; box-sizing: border-box; display: flex; flex-direction: column; gap: 40px; padding: 56px 44px 44px">
         <div class="sidebar-id" style="display: flex; flex-direction: column; gap: 40px">
         <div class="sidebar-face" style="display: flex; flex-direction: column; gap: 40px">
-        <div class="sidebar-portrait" onClick="{{ openPortrait }}" style="width: 100%; aspect-ratio: 4 / 5; cursor: zoom-in">
-          <image-slot id="sidebar-portrait" shape="rect" src="photos/headshot.jpg" placeholder="Portrait"></image-slot>
+        <div class="sidebar-portrait" onClick="{{ openPortrait }}" style="width: 100%; aspect-ratio: 4 / 5; position: relative; cursor: zoom-in">
+          <img src="photos/headshot.jpg" alt="Portrait of Alexander (Alec) Bell" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
         </div>
         <div style="display: flex; flex-direction: column; gap: 4px">
           <h1 style="font-size: 28px; font-weight: 700; margin: 0; line-height: 1; letter-spacing: -0.03em; white-space: nowrap">Alexander T. Bell<span style="color: #8f9a55">.</span></h1>
@@ -331,32 +327,32 @@
         </div>
         <div class="gallery-grid" onScroll="{{ onGalleryScroll }}" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 1060px">
           <figure class="span-2" style="grid-column: span 2; margin: 0; display: flex; flex-direction: column; gap: 9px">
-            <div class="g-img" onClick="{{ openFig2 }}" style="aspect-ratio: 8 / 5; cursor: zoom-in">
-              <image-slot id="fig-vapicon" shape="rect" src="photos/vapicon.jpg" placeholder="Photo"></image-slot>
+            <div class="g-img" onClick="{{ openFig2 }}" style="aspect-ratio: 8 / 5; position: relative; cursor: zoom-in">
+              <img src="photos/vapicon.jpg" alt="Alec Bell speaking about ThunderPhone at VapiCon" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
             </div>
             <figcaption style="font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint)">Talking ThunderPhone at VapiCon</figcaption>
           </figure>
           <figure style="margin: 0; display: flex; flex-direction: column; gap: 9px">
-            <div class="g-img" onClick="{{ openFig3 }}" style="flex: 1; min-height: 0; cursor: zoom-in">
-              <image-slot id="fig-piano" shape="rect" src="photos/piano.jpg" placeholder="Photo"></image-slot>
+            <div class="g-img" onClick="{{ openFig3 }}" style="flex: 1; min-height: 0; position: relative; cursor: zoom-in">
+              <img src="photos/piano.jpg" alt="Alec Bell playing the piano" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
             </div>
             <figcaption style="font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint)">At the piano</figcaption>
           </figure>
           <figure style="margin: 0; display: flex; flex-direction: column; gap: 9px">
-            <div class="g-img" onClick="{{ openFig4 }}" style="aspect-ratio: 4 / 3; cursor: zoom-in">
-              <image-slot id="fig-cofounders" shape="rect" src="photos/cofounders.jpg" placeholder="Photo"></image-slot>
+            <div class="g-img" onClick="{{ openFig4 }}" style="aspect-ratio: 4 / 3; position: relative; cursor: zoom-in">
+              <img src="photos/cofounders.jpg" alt="Alec Bell with his ThunderPhone co-founder Alex" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
             </div>
             <figcaption style="font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint)">With Alex, my co-founder</figcaption>
           </figure>
           <figure style="margin: 0; display: flex; flex-direction: column; gap: 9px">
-            <div class="g-img" onClick="{{ openFig5 }}" style="aspect-ratio: 4 / 3; cursor: zoom-in">
-              <image-slot id="fig-yc" shape="rect" src="photos/yc-cohort.jpg" placeholder="Photo"></image-slot>
+            <div class="g-img" onClick="{{ openFig5 }}" style="aspect-ratio: 4 / 3; position: relative; cursor: zoom-in">
+              <img src="photos/yc-cohort.jpg" alt="Alec Bell with the Y Combinator W23 batch" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
             </div>
             <figcaption style="font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint)">Y Combinator, W23</figcaption>
           </figure>
           <figure style="margin: 0; display: flex; flex-direction: column; gap: 9px">
-            <div class="g-img" onClick="{{ openFig6 }}" style="aspect-ratio: 4 / 3; cursor: zoom-in">
-              <image-slot id="fig-rockies" shape="rect" src="photos/rockies.jpg" placeholder="Photo"></image-slot>
+            <div class="g-img" onClick="{{ openFig6 }}" style="aspect-ratio: 4 / 3; position: relative; cursor: zoom-in">
+              <img src="photos/rockies.jpg" alt="Alec Bell in the Rocky Mountains" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
             </div>
             <figcaption style="font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint)">In the Rockies</figcaption>
           </figure>
