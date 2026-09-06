@@ -7,8 +7,7 @@
 <meta name="description" content="Occasional writing from Alec Bell on building ThunderPhone, AI voice agents, and side projects.">
 <link rel="canonical" href="https://alexandertbell.com/blog">
 <meta name="color-scheme" content="light dark">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preload" as="image" href="/photos/headshot.webp">
 <link rel="icon" type="image/svg+xml" href="/favicon.svg">
 <link rel="icon" type="image/x-icon" href="/favicon.ico" sizes="16x16 32x32 48x48">
 <link rel="apple-touch-icon" href="/apple-touch-icon.png">
@@ -60,6 +59,7 @@
     body[data-theme="dark"] ::-webkit-scrollbar-thumb { background: #454a35; }
     body[data-theme="dark"] ::-webkit-scrollbar-thumb:hover { background: #575d43; }
     ::-webkit-scrollbar-track { background: transparent; }
+    a:focus-visible, button:focus-visible { outline: 2px solid currentColor; outline-offset: 2px; }
     body[data-theme="dark"] .sidebar-portrait img { filter: brightness(0.92); }
     @media (min-width: 961px) {
       .site-footer { display: none !important; }
@@ -89,7 +89,7 @@
         <div class="sidebar-id" style="display: flex; flex-direction: column; gap: 40px">
         <div class="sidebar-face" style="display: flex; flex-direction: column; gap: 40px">
         <div class="sidebar-portrait" onClick="{{ openPortrait }}" style="width: 100%; aspect-ratio: 4 / 5; position: relative; cursor: zoom-in">
-          <img src="photos/headshot.jpg" alt="Portrait of Alexander (Alec) Bell" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
+          <img src="photos/headshot.webp" alt="Portrait of Alexander (Alec) Bell" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover">
         </div>
         <div style="display: flex; flex-direction: column; gap: 4px">
           <h1 style="font-size: 28px; font-weight: 700; margin: 0; line-height: 1; letter-spacing: -0.03em; white-space: nowrap"><a href="/" style="color: var(--panel-text)">Alexander T. Bell</a><span style="color: #8f9a55">.</span></h1>
@@ -104,7 +104,7 @@
             </button>
             <div style="position: relative; display: flex; align-items: center; gap: 9px">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--panel-muted); flex-shrink: 0"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path></svg>
-              <a href="https://wa.me/@alexander_bell" style="color: var(--panel-text)">wa.me/@alexander_bell</a>
+              <a rel="me" href="https://wa.me/@alexander_bell" style="color: var(--panel-text)">wa.me/@alexander_bell</a>
               <button class="wa-btn" onClick="{{ toggleWaInfo }}" aria-label="A note on messaging" style="background: none; border: none; padding: 0; cursor: pointer; color: var(--panel-muted); display: flex" style-hover="color: var(--panel-accent)">
                 <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"></circle><path d="M12 16v-4"></path><path d="M12 8h.01"></path></svg>
               </button>
@@ -112,11 +112,11 @@
             </div>
             <div style="display: flex; align-items: center; gap: 9px">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--panel-muted); flex-shrink: 0"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"></path><path d="M9 18c-4.51 2-5-2-7-2"></path></svg>
-              <a href="https://github.com/alec-bell" style="color: var(--panel-text)">github.com/alec-bell</a>
+              <a rel="me" href="https://github.com/alec-bell" style="color: var(--panel-text)">github.com/alec-bell</a>
             </div>
             <div style="display: flex; align-items: center; gap: 9px">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" style="color: var(--panel-muted); flex-shrink: 0"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4V8h4v2"></path><rect width="4" height="12" x="2" y="9"></rect><circle cx="4" cy="4" r="2"></circle></svg>
-              <a href="https://www.linkedin.com/in/alec-bell" style="color: var(--panel-text)">linkedin.com/in/alec-bell</a>
+              <a rel="me" href="https://www.linkedin.com/in/alec-bell" style="color: var(--panel-text)">linkedin.com/in/alec-bell</a>
             </div>
           </div>
         </div>
@@ -188,7 +188,7 @@ class Component extends DCLogic {
   renderVals() {
     const m = this.state.modal;
     return {
-      openPortrait: this.open('photos/headshot.jpg', 'Alexander T. Bell'),
+      openPortrait: this.open('photos/headshot.webp', 'Alexander T. Bell'),
       modalOpen: !!m,
       modalImg: m ? React.createElement('img', { src: m.src, alt: 'Enlarged photo', style: { display: 'block', maxWidth: '82vw', maxHeight: '74vh' } }) : null,
       modalCaption: m ? m.caption : '',

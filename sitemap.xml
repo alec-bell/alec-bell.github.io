@@ -3,13 +3,13 @@
   <url>
     <loc>https://alexandertbell.com/</loc>
     <lastmod>2026-09-06</lastmod>
-    <image:image><image:loc>https://alexandertbell.com/photos/headshot.jpg</image:loc></image:image>
-    <image:image><image:loc>https://alexandertbell.com/photos/vapicon.jpg</image:loc></image:image>
-    <image:image><image:loc>https://alexandertbell.com/photos/piano.jpg</image:loc></image:image>
-    <image:image><image:loc>https://alexandertbell.com/photos/piano-full.jpg</image:loc></image:image>
-    <image:image><image:loc>https://alexandertbell.com/photos/cofounders.jpg</image:loc></image:image>
-    <image:image><image:loc>https://alexandertbell.com/photos/yc-cohort.jpg</image:loc></image:image>
-    <image:image><image:loc>https://alexandertbell.com/photos/rockies.jpg</image:loc></image:image>
+    <image:image><image:loc>https://alexandertbell.com/photos/headshot.webp</image:loc></image:image>
+    <image:image><image:loc>https://alexandertbell.com/photos/vapicon.webp</image:loc></image:image>
+    <image:image><image:loc>https://alexandertbell.com/photos/piano.webp</image:loc></image:image>
+    <image:image><image:loc>https://alexandertbell.com/photos/piano-full.webp</image:loc></image:image>
+    <image:image><image:loc>https://alexandertbell.com/photos/cofounders.webp</image:loc></image:image>
+    <image:image><image:loc>https://alexandertbell.com/photos/yc-cohort.webp</image:loc></image:image>
+    <image:image><image:loc>https://alexandertbell.com/photos/rockies.webp</image:loc></image:image>
   </url>
   <url>
     <loc>https://alexandertbell.com/blog</loc>
@@ -29,5 +29,11 @@
   </url>
   <url>
     <loc>https://alexandertbell.com/pedigree/</loc>
+  </url>
+  <url>
+    <loc>https://alexandertbell.com/pedigree/bell-lineage</loc>
+  </url>
+  <url>
+    <loc>https://alexandertbell.com/pedigree/bell-deep-line</loc>
   </url>
 </urlset>
