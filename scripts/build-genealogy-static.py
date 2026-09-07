@@ -67,18 +67,66 @@ def relationship(n):
 def media_list(items, label):
     if not items:
         return ""
-    lis = []
+    figs = []
     for it in items:
+        u = (it.get("u") or "").strip()
         cap = (it.get("c") or "").strip()
         why = (it.get("w") or "").strip()
-        body = f"<b>{cap}</b>" if cap else ""
+        caption = f"<b>{cap}</b>" if cap else ""
         if why:
-            body += f" — {why}" if body else why
-        if body:
-            lis.append(f"<li>{body}</li>")
-    if not lis:
+            caption += f" — {why}" if caption else why
+        img = f'<img src="/pedigree/{u}" alt="{cap}" loading="lazy" decoding="async">' if u else ""
+        if img or caption:
+            figs.append(f"<figure>{img}<figcaption>{caption}</figcaption></figure>")
+    if not figs:
         return ""
-    return f'<p class="evhead">{label}</p><ul class="media">' + "\n".join(lis) + "</ul>"
+    return f'<p class="evhead">{label}</p>' + "\n".join(figs)
+
+
+def fetch_orphan_images(referenced):
+    """Images in the pedigree repo's img/ that no JSON entry references —
+    continuation pages of multi-page scans. Listed in an appendix so every
+    published image is reachable from static HTML. Best-effort: skipped if
+    the GitHub API is unavailable."""
+    try:
+        with urllib.request.urlopen(
+                "https://api.github.com/repos/alec-bell/pedigree/contents/img", timeout=30) as r:
+            listing = json.load(r)
+        files = {e["name"] for e in listing if e.get("type") == "file"}
+        return sorted(files - {u.replace("img/", "") for u in referenced})
+    except Exception as e:
+        print(f"orphan-image listing skipped ({e})")
+        return []
+
+
+def update_sitemap(refs, orphans):
+    """Maintain the image-sitemap entries for /family-tree between markers."""
+    sm = ROOT / "sitemap.xml"
+    s = sm.read_text()
+    b, e = "<!-- family-tree-images:begin -->", "<!-- family-tree-images:end -->"
+    if b not in s or e not in s:
+        print("sitemap image markers missing, skipped")
+        return
+    urls = [f"https://alexandertbell.com/pedigree/{u}" for u in dict.fromkeys(refs)]
+    urls += [f"https://alexandertbell.com/pedigree/img/{n}" for n in orphans]
+    body = "\n".join(f"    <image:image><image:loc>{u}</image:loc></image:image>" for u in urls)
+    s = s[:s.index(b) + len(b)] + "\n" + body + "\n    " + s[s.index(e):]
+    sm.write_text(s)
+    print(f"sitemap: {len(urls)} family-tree image entries")
+
+
+def orphan_appendix(orphans):
+    if not orphans:
+        return ""
+    figs = []
+    for name in orphans:
+        cap = re.sub(r"\.[a-z]+$", "", name).strip("-").replace("-", " ")
+        figs.append(f'<figure><img src="/pedigree/img/{name}" alt="{cap}" loading="lazy" decoding="async">'
+                    f"<figcaption>{cap}</figcaption></figure>")
+    return ('<article id="record-pages">\n<h3>Additional record pages</h3>\n'
+            '<p class="meta">Continuation pages of multi-page evidence scans above — every published '
+            'scan, reachable in full. Captions are derived from the archival filenames.</p>\n'
+            + "\n".join(figs) + "\n</article>")
 
 
 def entry_html(n, p):
@@ -129,9 +177,10 @@ STYLE = """<style>
   a:hover { text-decoration: underline; text-underline-offset: 4px; }
   .meta { margin: 0 0 8px; font-size: 12px; color: var(--faint); }
   .evhead { margin: 10px 0 0; font-size: 11.5px; color: var(--faint); font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
-  ul.media { margin: 4px 0 0; padding-left: 18px; font-size: 13px; }
-  ul.media li { margin: 3px 0; }
-  ul.media b { color: var(--text); font-weight: 700; }
+  figure { margin: 10px 0 0; }
+  figure img { display: block; max-width: min(420px, 100%); height: auto; border: 1px solid var(--divider); }
+  figcaption { font-size: 12.5px; margin-top: 4px; max-width: 640px; }
+  figcaption b { color: var(--text); font-weight: 700; }
   article { border-top: 1px solid var(--divider); padding-top: 4px; }
   .intro p { margin: 0 0 10px; }
   .foot { margin-top: 44px; padding-top: 18px; border-top: 1px solid var(--divider); font-size: 11.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--faint); display: flex; justify-content: space-between; }
@@ -195,6 +244,11 @@ def main():
     n_people = len(people)
     rendered = [(n, entry_html(n, p)) for n, p in people]
     parts = split_parts(rendered)
+    refs = [it["u"] for _, p in people for lst in (p.get("ph") or [], p.get("ev") or [])
+            for it in lst if it.get("u")]
+    orphans = fetch_orphan_images(refs)
+    appendix = orphan_appendix(orphans)
+    update_sitemap(refs, orphans)
 
     def part_links():
         return ", ".join(
@@ -224,7 +278,8 @@ def main():
             f"{n_people} people with names, dates, relationships, stories, and evidence.")
     (ROOT / "family-tree.html").write_text(page_shell(
         "Family tree · Alexander T. Bell", desc, "/family-tree",
-        "The family tree, in full", full_intro, "\n".join(h for _, h in rendered)))
+        "The family tree, in full", full_intro,
+        "\n".join(h for _, h in rendered) + "\n" + appendix))
 
     # Part pages (canonicalize to the full page).
     for i, chunk in enumerate(parts):
@@ -236,7 +291,8 @@ def main():
             f"Family tree, part {i + 1} · Alexander T. Bell",
             f"Part {i + 1} of the Bell family tree in text form: ahnentafel #{lo}–#{hi}.",
             "/family-tree",  # canonical: the full page
-            f"The family tree, part {i + 1}", intro, "\n".join(h for _, h in chunk)))
+            f"The family tree, part {i + 1}", intro,
+            "\n".join(h for _, h in chunk) + ("\n" + appendix if i == len(parts) - 1 else "")))
 
     # Remove stale part files beyond the current count.
     for stale in ROOT.glob("family-tree-*.html"):
