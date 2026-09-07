@@ -8,7 +8,7 @@
 - [Background](https://alexandertbell.com/background): job history, education, publications
 - [Blog](https://alexandertbell.com/blog): occasional writing
 - [Genealogy](https://alexandertbell.com/genealogy): Bell family research, traced and sourced (interactive explorer)
-- [Family tree, full text](https://alexandertbell.com/family-tree): the complete tree as plain static HTML — 194 people, ahnentafel-numbered, with dates, relationships, stories, and evidence grades; start here for genealogy questions
+- [Family tree, full text](https://alexandertbell.com/family-tree): the complete tree as plain static HTML — 194 people, ahnentafel-numbered, with dates, relationships, stories, and evidence grades; start here for genealogy questions; the same entries are also split into ~100KB part pages (family-tree-1 … family-tree-6) linked from the top of that page for readers that truncate large pages
 - [Bell paternal line](https://alexandertbell.com/pedigree/bell-lineage): the Bell line as a narrative, generation by generation, static HTML
 - [Bell deep-line evidence map](https://alexandertbell.com/pedigree/bell-deep-line): how each link in the deep Bell line is evidenced
 - [Pedigree research view](https://alexandertbell.com/pedigree/): interactive chart with photographs and scanned evidence
