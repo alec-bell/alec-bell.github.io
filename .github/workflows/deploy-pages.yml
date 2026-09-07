@@ -47,4 +47,4 @@ jobs:
         run: |
           curl -s -X POST https://api.indexnow.org/indexnow \
             -H 'Content-Type: application/json; charset=utf-8' \
-            -d '{"host":"alexandertbell.com","key":"96c321c0bb713c302665b75bb5721093","keyLocation":"https://alexandertbell.com/96c321c0bb713c302665b75bb5721093.txt","urlList":["https://alexandertbell.com/","https://alexandertbell.com/blog","https://alexandertbell.com/hello-world","https://alexandertbell.com/background","https://alexandertbell.com/genealogy","https://alexandertbell.com/pedigree/"]}'
+            -d '{"host":"alexandertbell.com","key":"96c321c0bb713c302665b75bb5721093","keyLocation":"https://alexandertbell.com/96c321c0bb713c302665b75bb5721093.txt","urlList":["https://alexandertbell.com/","https://alexandertbell.com/blog","https://alexandertbell.com/hello-world","https://alexandertbell.com/background","https://alexandertbell.com/genealogy","https://alexandertbell.com/family-tree","https://alexandertbell.com/pedigree/"]}'
