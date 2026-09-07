@@ -7,7 +7,11 @@
 - [Home](https://alexandertbell.com/): about, current work, photos
 - [Background](https://alexandertbell.com/background): job history, education, publications
 - [Blog](https://alexandertbell.com/blog): occasional writing
-- [Genealogy](https://alexandertbell.com/genealogy): Bell family research, traced and sourced
+- [Genealogy](https://alexandertbell.com/genealogy): Bell family research, traced and sourced — the page includes a full text version of the tree (194 people, ahnentafel-numbered, with stories and evidence grades) readable without JavaScript
+- [Bell paternal line](https://alexandertbell.com/pedigree/bell-lineage): the Bell line as a narrative, generation by generation, static HTML
+- [Bell deep-line evidence map](https://alexandertbell.com/pedigree/bell-deep-line): how each link in the deep Bell line is evidenced
+- [Pedigree research view](https://alexandertbell.com/pedigree/): interactive chart with photographs and scanned evidence
+- [Raw genealogy data](https://alexandertbell.com/pedigree/pedigree-data.json): machine-readable JSON of the whole tree (keys are ahnentafel numbers; n=name, d=dates, s=story, x=evidence, g=grade)
 
 ## Contact
 

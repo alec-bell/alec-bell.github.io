@@ -28,6 +28,9 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
+      - name: Rebuild genealogy static text from live pedigree data
+        run: python3 scripts/build-genealogy-static.py
+
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
