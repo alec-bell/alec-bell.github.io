@@ -58,6 +58,10 @@
     body { margin: 0; background: var(--bg); color: var(--text); font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; font-size: 15px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
     a { color: var(--accent); text-decoration: none; }
     a:hover { text-decoration: underline; text-underline-offset: 4px; }
+    .qr-btn { transition: color 0.15s ease; }
+    .qr-btn:hover { color: var(--panel-accent); }
+    .qr-nav { display: none !important; }
+    @media (max-width: 960px) { .sidebar-nav { position: relative; } .qr-nav { display: flex !important; position: absolute; top: -7px; right: 0; height: 14px; line-height: 0; padding-left: 8px !important; background: var(--panel) !important; } }
     /* Scrollbars in the design language: thin, square, olive thumb. */
     .sidebar-contacts a { transition: color 0.15s ease; }
     .sidebar-contacts a:hover { color: var(--panel-accent) !important; text-decoration: none; }
@@ -142,10 +146,12 @@
           <a href="/blog" style="color: var(--panel-muted)">Blog</a>
           <span style="color: var(--panel-accent)">Background</span>
           <a href="/genealogy" style="color: var(--panel-muted)">Genealogy</a>
+          <button class="qr-btn qr-nav" type="button" aria-label="Show a QR code for this site" title="QR code" style="background: none; border: none; padding: 0; cursor: pointer; color: var(--panel-muted); display: flex; align-items: center"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="5.5" y="5.5" width="2" height="2" fill="currentColor" stroke="none"></rect><rect x="16.5" y="5.5" width="2" height="2" fill="currentColor" stroke="none"></rect><rect x="5.5" y="16.5" width="2" height="2" fill="currentColor" stroke="none"></rect><path d="M14 14h3v3h-3z"></path><path d="M21 14v3h-2"></path><path d="M14 21h3"></path><path d="M19 21h2v-2"></path></svg></button>
         </nav>
         <div class="sidebar-foot" style="margin-top: auto; padding-top: 24px; display: flex; flex-direction: column; gap: 4px; font-size: 10.5px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--panel-muted)">
           <span>© 2026 Alexander T. Bell</span>
           <span>San Francisco, CA</span>
+          <button class="qr-btn qr-foot" type="button" aria-label="Show a QR code for this site" title="QR code" style="background: none; border: none; padding: 0; cursor: pointer; color: var(--panel-muted); display: flex; align-items: center; margin-top: 10px; align-self: flex-start"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect><rect x="5.5" y="5.5" width="2" height="2" fill="currentColor" stroke="none"></rect><rect x="16.5" y="5.5" width="2" height="2" fill="currentColor" stroke="none"></rect><rect x="5.5" y="16.5" width="2" height="2" fill="currentColor" stroke="none"></rect><path d="M14 14h3v3h-3z"></path><path d="M21 14v3h-2"></path><path d="M14 21h3"></path><path d="M19 21h2v-2"></path></svg></button>
         </div>
       </div>
     </aside>
@@ -308,5 +314,6 @@ class Component extends DCLogic {
   }
 }
 </script>
+<script src="/qr.js" defer></script>
 </body>
 </html>
