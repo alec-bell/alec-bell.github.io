@@ -17,10 +17,17 @@ collapsed content). This script renders the same public JSON into:
      genealogy-static markers) naming the direct Bell line and linking
      to the full text page.
 
-Run from the repo root. Fetches the live JSON first so a deploy always
-ships current data; falls back to the committed snapshot offline.
+Run from the repo root. Data comes from, in order of preference:
+
+  1. $PEDIGREE_DATA_FILE — a locally built pedigree-data.json. This is what
+     the genealogy repo's _tools/deploy_all.sh passes in, so the family-tree
+     pages are built from the same data as the chart in the same run,
+     without waiting for GitHub Pages to redeploy the pedigree site first.
+  2. the live JSON at alexandertbell.com/pedigree/.
+  3. the committed snapshot, when offline.
 """
 import json
+import os
 import re
 import sys
 import urllib.request
@@ -42,6 +49,12 @@ GOATCOUNTER = ('<script data-goatcounter="https://alexandertbell.goatcounter.com
 
 
 def load_data():
+    local = os.environ.get("PEDIGREE_DATA_FILE")
+    if local:
+        raw = Path(local).read_text(encoding="utf-8")
+        SNAPSHOT.write_text(raw)
+        print(f"using local JSON {local} ({len(raw)} bytes), snapshot updated")
+        return json.loads(raw)
     try:
         with urllib.request.urlopen(LIVE_URL, timeout=30) as r:
             raw = r.read().decode()
