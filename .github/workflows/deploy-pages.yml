@@ -28,7 +28,15 @@ jobs:
       - name: Setup Pages
         uses: actions/configure-pages@v5
 
-      - name: Rebuild genealogy static text from live pedigree data
+      # Build from the COMMITTED snapshot, not the live URL. The genealogy
+      # repo's deploy_all.sh pushes the pedigree site and this one back to
+      # back, so at this moment the live JSON is often still the previous
+      # deploy — re-fetching it here would overwrite the correct pages that
+      # were just committed. refresh-genealogy.yml handles the other
+      # direction, where the pedigree data changes on its own.
+      - name: Rebuild genealogy static text from the committed pedigree data
+        env:
+          PEDIGREE_DATA_FILE: pedigree-data.json
         run: python3 scripts/build-genealogy-static.py
 
       - name: Upload Pages artifact
