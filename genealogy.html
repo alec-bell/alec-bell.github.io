@@ -261,7 +261,6 @@
 <script type="text/x-dc" data-dc-script data-props="{&quot;theme&quot;: {&quot;editor&quot;: &quot;enum&quot;, &quot;options&quot;: [&quot;light&quot;, &quot;dark&quot;], &quot;default&quot;: &quot;light&quot;, &quot;tsType&quot;: &quot;'light' | 'dark'&quot;, &quot;section&quot;: &quot;Appearance&quot;}}">
 class Component extends DCLogic {
   state = { D: null, cols: [null], sel: null, tab: 'story', lb: null };
-  SP = {1:['b. 1997','Cincinnati, Ohio'],2:['b. 1961','Birmingham, Alabama'],4:['1935–2001','Atlanta → Chattanooga'],8:['1901/02 – c. 1950','Alabama'],16:['c. 1876–1921','Barbour County, Alabama'],32:['1841–1915','Barbour County, Alabama'],64:['1807–1890','South Carolina → Barbour Co., Alabama'],128:['c. 1772–1839','Sumter District, South Carolina'],256:['d. c. 1808','Salem, Sumter District, S.C.'],512:['d. c. 1786','Duplin Co., N.C. → Camden District, S.C.']};
   ROM = ['','I','II','III','IV','V','VI','VII','VIII','IX','X','XI','XII','XIII','XIV'];
   current() { return this.state.theme ?? (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'); }
   apply() { document.body.dataset.theme = this.current(); }
@@ -291,9 +290,10 @@ class Component extends DCLogic {
     }
     this._n = n;
   }
-  meta(id){ const P=this.state.D[id]; if(this.SP[id]) return this.SP[id][0]+' · '+this.SP[id][1];
+  meta(id){ const P=this.state.D[id];
     const d=P.d||''; return d.length>64? d.slice(0,62).trim()+'…' : d; }
-  excerpt(P){ const t=(P.s||P.x||'').replace(/<[^>]+>/g,' ').replace(/\s+/g,' ').trim();
+  excerpt(P){ const el=document.createElement('textarea'); el.innerHTML=(P.s||P.x||'').replace(/<[^>]+>/g,' ');
+    const t=el.value.replace(/\s+/g,' ').trim();
     if(!t) return ''; const i=t.indexOf('. ',60); return i>0&&i<220? t.slice(0,i+1) : t.slice(0,200)+(t.length>200?'…':''); }
   surname(n){ const p=n.replace(/["“”()]/g,'').replace(/\s*·.*$/,'').trim().split(/\s+/); return (p[p.length-1]||'').toUpperCase(); }
   person(id, roman){ const P=this.state.D[id]; return {
