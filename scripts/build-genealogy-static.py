@@ -218,7 +218,11 @@ def page_shell(title, desc, canonical_path, h1, intro_html, entries_html):
 <meta property="og:description" content="{desc}">
 <meta property="og:url" content="https://alexandertbell.com{canonical_path}">
 <meta property="og:site_name" content="Alexander T. Bell">
-<meta property="og:image" content="https://alexandertbell.com/og-card.png?v=3">
+<meta property="og:image" content="https://alexandertbell.com/og-family-tree.png?v=1">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://alexandertbell.com/og-family-tree.png?v=1">
 {GOATCOUNTER}
 {STYLE}
 </head>
